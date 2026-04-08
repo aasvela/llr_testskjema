@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Land-for-land-rapport – Testskjema (RF-1352 / CbCR)</title>
+<style>
+:root {
+  --primary: #1a4f7a;
+  --primary-light: #2471a3;
+  --accent: #c0392b;
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --border: #cfd8e0;
+  --text: #1c2a38;
+  --muted: #607080;
+  --info-bg: #eaf4fb;
+  --info-border: #aed6f1;
+  --success: #1e8449;
+  --warning-bg: #fef9e7;
+  --warning-border: #f0c040;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65}
+
+/* HEADER */
+.hdr{background:var(--primary);color:#fff;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hdr-inner{max-width:1380px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:14px}
+.hdr-logo{background:#fff;color:var(--primary);font-weight:800;font-size:10px;letter-spacing:.5px;padding:4px 9px;border-radius:4px;flex-shrink:0}
+.hdr-text h1{font-size:17px;font-weight:700}
+.hdr-text p{font-size:11px;opacity:.75}
+.hdr-tag{margin-left:auto;background:rgba(255,255,255,.15);padding:3px 12px;border-radius:14px;font-size:11px;flex-shrink:0}
+
+/* LAYOUT */
+.layout{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:250px 1fr;gap:22px;padding:22px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:52px;height:fit-content;max-height:calc(100vh - 64px);overflow-y:auto}
+.nav-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.nav-card h3{padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);background:#f7f9fb;border-bottom:1px solid var(--border)}
+.nav-a{display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;color:var(--text);font-size:13px;border-bottom:1px solid #f0f2f4;transition:background .12s}
+.nav-a:hover{background:var(--info-bg)}
+.nav-a.active{background:var(--info-bg);color:var(--primary);font-weight:600;border-left:3px solid var(--primary)}
+.nav-n{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* SECTIONS */
+.sec{background:var(--card);border:1px solid var(--border);border-radius:9px;margin-bottom:22px;overflow:hidden}
+.sec-hdr{padding:14px 22px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;display:flex;align-items:center;gap:12px}
+.sec-num{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0}
+.sec-hdr-text .t1{font-size:15px;font-weight:700}
+.sec-hdr-text .t2{font-size:11px;opacity:.8;margin-top:1px}
+.sec-body{padding:22px}
+
+/* FORM FIELDS */
+.row{display:grid;gap:14px;margin-bottom:14px}
+.row-2{grid-template-columns:repeat(2,1fr)}
+.row-3{grid-template-columns:repeat(3,1fr)}
+.row-4{grid-template-columns:repeat(4,1fr)}
+.row-1{grid-template-columns:1fr}
+@media(max-width:700px){.row-2,.row-3,.row-4{grid-template-columns:1fr}}
+
+.fld{}
+label.lbl{display:block;font-weight:600;font-size:12.5px;margin-bottom:4px;color:var(--text)}
+label.lbl .req{color:#c0392b;margin-left:1px}
+label.lbl .opt{color:var(--muted);font-weight:400;font-size:11px;margin-left:4px}
+label.lbl .tag{font-family:monospace;font-size:10px;background:#edf2f7;padding:1px 5px;border-radius:3px;color:var(--primary);margin-left:5px;border:1px solid #cbd5e0}
+
+input[type=text],input[type=number],input[type=date],input[type=datetime-local],select,textarea{
+  width:100%;padding:7px 11px;border:1px solid var(--border);border-radius:6px;font-size:13.5px;font-family:inherit;background:#fff;color:var(--text);transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 3px rgba(36,113,163,.14)}
+input[readonly]{background:#f5f7fa;color:var(--muted);cursor:default}
+select[disabled]{background:#f5f7fa;color:var(--muted)}
+textarea{min-height:72px;resize:vertical}
+
+.help{font-size:11.5px;color:var(--muted);margin-top:3px}
+.info-box{background:var(--info-bg);border:1px solid var(--info-border);border-radius:6px;padding:9px 13px;font-size:12px;color:#1a5276;margin:6px 0 10px}
+.warn-box{background:var(--warning-bg);border:1px solid var(--warning-border);border-radius:6px;padding:9px 13px;font-size:12px;color:#7d5a00;margin:6px 0 10px}
+
+/* MONEY */
+.money-wrap{display:grid;grid-template-columns:1fr 90px;gap:6px}
+
+/* DYNAMIC BLOCKS */
+.dyn-wrap{border:1px solid var(--border);border-radius:8px;margin-bottom:14px}
+.dyn-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:#f7f9fb;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.dyn-hdr-l{display:flex;align-items:center;gap:10px;font-weight:600;font-size:13px}
+.badge{display:inline-block;background:var(--primary);color:#fff;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700}
+.badge-green{background:#1e8449}
+.badge-gray{background:var(--muted)}
+.dyn-body{padding:18px}
+.caret{font-size:10px;transition:transform .2s;display:inline-block}
+.collapsed>.dyn-hdr .caret{transform:rotate(-90deg)}
+.collapsed>.dyn-body{display:none}
+
+/* SUB SECTION */
+.sub{background:#f9fbfd;border:1px solid #dde6ef;border-radius:7px;padding:15px;margin-bottom:14px}
+.sub-t{font-size:12px;font-weight:700;color:var(--primary);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:6px}
+
+/* CHECKBOXES */
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:5px;margin-top:6px}
+.cb-item{display:flex;align-items:flex-start;gap:7px;padding:6px 9px;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:background .1s}
+.cb-item:hover{background:var(--info-bg)}
+.cb-item input{width:auto;margin-top:1px;flex-shrink:0;cursor:pointer}
+.cb-item .cb-lbl{margin:0;font-weight:400;cursor:pointer;font-size:13px}
+.cb-item .cb-code{font-family:monospace;font-size:10px;color:var(--primary);font-weight:600}
+
+/* BUTTONS */
+.btn{padding:7px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-light)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#176038}
+.btn-danger{background:#c0392b;color:#fff;padding:5px 11px;font-size:12px}
+.btn-danger:hover{background:#a93226}
+.btn-sec{background:#fff;color:var(--primary);border:1px solid var(--primary)}
+.btn-sec:hover{background:var(--info-bg)}
+.btn-add{width:100%;justify-content:center;padding:9px;background:#e8f8f5;color:var(--success);border:1.5px dashed var(--success);border-radius:6px;margin-top:8px}
+.btn-add:hover{background:#d5f5e3}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+
+/* SEP */
+.sep{height:1px;background:var(--border);margin:18px 0}
+
+/* XML */
+.xml-out{background:#1e2130;color:#abb2bf;padding:18px;border-radius:7px;font-family:'Consolas','Monaco',monospace;font-size:11.5px;line-height:1.7;overflow:auto;max-height:520px;white-space:pre;tab-size:2}
+
+/* STICKY FOOTER */
+.sticky-foot{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--border);padding:12px 22px;display:flex;gap:10px;justify-content:flex-end;z-index:50}
+
+/* TABS */
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:16px}
+.tab{padding:7px 18px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* TOOLTIP */
+.tt{position:relative;display:inline-block;cursor:help;color:var(--primary-light)}
+.tt::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1c2a38;color:#fff;padding:5px 10px;border-radius:5px;font-size:11px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:300;max-width:260px;white-space:normal;text-align:center;line-height:1.4}
+.tt:hover::after{opacity:1}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-logo">SKATTEETATEN</div>
+    <div class="hdr-text">
+      <h1>Land-for-land-rapport (LLR) – Testskjema</h1>
+      <p>Melding om flernasjonale konserns fordeling av inntekt, skatt m.v. · RF-1352 / CbCR / OECD BEPS Action 13</p>
+    </div>
+    <div class="hdr-tag">⚗️ Funksjonell prototype</div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="nav-card">
+      <h3>Seksjoner</h3>
+      <a class="nav-a" href="#sec-melding"><span class="nav-n">1</span> Meldingshode</a>
+      <a class="nav-a" href="#sec-enhet"><span class="nav-n">2</span> Rapporterende enhet</a>
+      <a class="nav-a" href="#sec-rapporter"><span class="nav-n">3</span> LLR per land (Tabell 1 &amp; 2)</a>
+      <a class="nav-a" href="#sec-tillegg"><span class="nav-n">4</span> Andre opplysninger (Tabell 3)</a>
+      <a class="nav-a" href="#sec-xml"><span class="nav-n">↓</span> Generer XML</a>
+    </div>
+    <div style="margin-top:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--muted)">
+      <strong style="display:block;color:var(--text);margin-bottom:5px">ℹ️ Om dette skjemaet</strong>
+      Dette er et interaktivt testskjema som fullstendig erstatter XML-filen som normalt lastes opp. Fyll inn data, og skjemaet genererer gyldig CBC-XML (OECD v2.0) nedst.<br><br>
+      <strong style="color:var(--text)">Obligatoriske felt</strong> er merket med <span style="color:#c0392b">*</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- ─── SEKSJON 1: MELDINGSHODE ─── -->
+    <section class="sec" id="sec-melding">
+      <div class="sec-hdr">
+        <div class="sec-num">1</div>
+        <div class="sec-hdr-text">
+          <div class="t1">Meldingshode <span style="font-family:monospace;font-size:12px;opacity:.8">&lt;MessageSpec&gt;</span></div>
+          <div class="t2">Teknisk metadata om meldingen – hvem sender, hvilken periode, er dette en ny eller korrigerende melding?</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">
+          Meldingshode identifiserer meldingen som helhet. Felter med fast verdi (TransmittingCountry, ReceivingCountry, MessageType, Language) er forhåndsutfylt og kan ikke endres for norske innleveringer.
+        </div>
+        <div class="row row-3">
+          <div class="fld">
+            <label class="lbl">Rapporteringspliktig foretak (org.nr) <span class="req">*</span> <span class="tag">SendingEntityIN</span></label>
+            <input type="text" id="ms_sendingEntityIN" placeholder="f.eks. 987654321" maxlength="200">
+            <div class="help">Organisasjonsnummeret til det foretaket som sender inn rapporten på vegne av konsernet.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Avsenderland <span class="tag">TransmittingCountry</span></label>
+            <input type="text" value="NO" readonly>
+            <div class="help">Fast verdi «NO» for alle norske innleveringer.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Mottakerland <span class="tag">ReceivingCountry</span></label>
+            <input type="text" value="NO" readonly>
+            <div class="help">Fast verdi «NO» – meldes til norske skattemyndigheter.</div>
+          </div>
+        </div>
+        <div class="row row-4">
+          <div class="fld">
+            <label class="lbl">Meldingstype <span class="tag">MessageType</span></label>
+            <input type="text" value="CBC" readonly>
+          </div>
+          <div class="fld">
+            <label class="lbl">Språk <span class="tag">Language</span></label>
+            <input type="text" value="EN" readonly>
+            <div class="help">Engelsk er påkrevd.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Meldingstype-indikator <span class="req">*</span> <span class="tag">MessageTypeIndic</span></label>
+            <select id="ms_messageTypeIndic" onchange="toggleCorrRef()">
+              <option value="CBC401">CBC401 – Ny/første gangs innsendelse</option>
+              <option value="CBC402">CBC402 – Korreksjon av tidligere innsendt</option>
+            </select>
+            <div class="help">Bruk CBC401 alltid ved første gangs innsendelse. CBC402 ved rettelse.</div>
+          </div>
+          <div class="fld" id="corrRefWrap" style="display:none">
+            <label class="lbl">Ref til melding som korrigeres <span class="opt">(valgfri)</span> <span class="tag">CorrMessageRefId</span></label>
+            <input type="text" id="ms_corrMessageRefId" placeholder="Tidligere MessageRefId">
+            <div class="help">Pek til én eller flere tidligere meldinger som korrigeres.</div>
+          </div>
+        </div>
+        <div class="row row-3">
+          <div class="fld">
+            <label class="lbl">Unik meldingsreferanse <span class="req">*</span> <span class="tag">MessageRefId</span></label>
+            <input type="text" id="ms_messageRefId" placeholder="f.eks. NO2024-987654321-001">
+            <div class="help">Avsenders unike ID for denne meldingen (maks 170 tegn). Brukes ved eventuell kontakt om meldingen.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Rapporteringsperiode (siste dag) <span class="req">*</span> <span class="tag">ReportingPeriod</span></label>
+            <input type="date" id="ms_reportingPeriod" value="2024-12-31">
+            <div class="help">Regnskapsårets siste dag, format ÅÅÅÅ-MM-DD. For kalenderår 2024: 2024-12-31.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Tidsstempel <span class="req">*</span> <span class="tag">Timestamp</span></label>
+            <input type="datetime-local" id="ms_timestamp">
+            <div class="help">Innsendingsdato og -tid. Settes automatisk til nå.</div>
+          </div>
+        </div>
+        <div class="row row-2">
+          <div class="fld">
+            <label class="lbl">Advarsel/tilleggsinformasjon <span class="opt">(valgfri)</span> <span class="tag">Warning</span></label>
+            <textarea id="ms_warning" placeholder="Fritekst om begrensninger eller særlig informasjon om innholdet i rapporten..."></textarea>
+            <div class="help">Brukes til å gi tilleggsinformasjon eller advarsler om innholdet. Ikke ment for automatisk prosessering.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Kontaktperson <span class="opt">(valgfri)</span> <span class="tag">Contact</span></label>
+            <textarea id="ms_contact" placeholder="Navn og kontaktinformasjon til person ansvarlig for rapporten..."></textarea>
+            <div class="help">Oppgi dersom kontaktperson er en annen enn innsender i Altinn. Fritekst, ikke for automatisk prosessering.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SEKSJON 2: RAPPORTERENDE ENHET ─── -->
+    <section class="sec" id="sec-enhet">
+      <div class="sec-hdr">
+        <div class="sec-num">2</div>
+        <div class="sec-hdr-text">
+          <div class="t1">Rapporterende enhet <span style="font-family:monospace;font-size:12px;opacity:.8">&lt;ReportingEntity&gt;</span></div>
+          <div class="t2">Identifiserer det morselskapet (eller andre selskapet) som har rapporteringsplikt og leverer rapporten for konsernet</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">
+          <strong>Hvem er rapporterende enhet?</strong>
+          Normalt er dette <em>morselskapet</em> som er skattemessig hjemmehørende i Norge og som har foretak i utlandet. Rapporterende enhet identifiseres med organisasjonsnummer (TIN) og fullt juridisk navn.
+        </div>
+
+        <div class="sub">
+          <div class="sub-t">📋 Enhetsinformasjon <span style="font-family:monospace;font-weight:400;font-size:10px">&lt;Entity&gt; / &lt;OrganisationParty&gt;</span></div>
+          <div class="row row-3">
+            <div class="fld">
+              <label class="lbl">Hjemland (skattejurisdiksjon) <span class="req">*</span> <span class="tag">ResCountryCode</span></label>
+              <select id="re_resCountry"><!-- populated by JS --></select>
+              <div class="help">Landet der rapporterende enhet er skattemessig hjemmehørende. Normalt NO.</div>
+            </div>
+            <div class="fld">
+              <label class="lbl">TIN / Org.nr <span class="req">*</span> <span class="tag">TIN</span></label>
+              <input type="text" id="re_tin" placeholder="987654321">
+              <div class="help">Skattemessig identifikasjonsnummer (norsk org.nr, utstedt av Norge).</div>
+            </div>
+            <div class="fld">
+              <label class="lbl">TIN utstedt av <span class="tag">issuedBy</span></label>
+              <select id="re_tinIssuedBy"><!-- populated by JS --></select>
+            </div>
+          </div>
+          <div class="row row-3">
+            <div class="fld">
+              <label class="lbl">Fullt navn (juridisk) <span class="req">*</span> <span class="tag">Name</span></label>
+              <input type="text" id="re_name" placeholder="AS EKSEMPEL KONSERN">
+            </div>
+            <div class="fld">
+              <label class="lbl">Globalt enhets-ID (EIN) <span class="opt">(valgfri)</span> <span class="tag">IN</span></label>
+              <input type="text" id="re_in" placeholder="f.eks. LEI-kode eller EORI">
+              <div class="help">Andre identifikasjonsnumre, f.eks. globalt enhetsidentifiseringsnummer (EIN/LEI).</div>
+            </div>
+            <div class="fld">
+              <label class="lbl">ID-type <span class="opt">(valgfri)</span> <span class="tag">INType</span></label>
+              <input type="text" id="re_inType" placeholder="f.eks. LEI, EIN">
+            </div>
+          </div>
+        </div>
+
+        <div class="sub">
+          <div class="sub-t">🏢 Adresse <span style="font-family:monospace;font-weight:400;font-size:10px">&lt;Address&gt; / &lt;AddressFix&gt;</span></div>
+          <div class="row row-2">
+            <div class="fld">
+              <label class="lbl">Land <span class="req">*</span> <span class="tag">CountryCode</span></label>
+              <select id="re_addrCountry"><!-- populated by JS --></select>
+            </div>
+            <div class="fld">
+              <label class="lbl">Gate/vei <span class="tag">Street</span></label>
+              <input type="text" id="re_street" placeholder="Storgata">
+            </div>
+          </div>
+          <div class="row row-4">
+            <div class="fld">
+              <label class="lbl">Byggnr <span class="opt">(valgfri)</span> <span class="tag">BuildingIdentifier</span></label>
+              <input type="text" id="re_building" placeholder="1">
+            </div>
+            <div class="fld">
+              <label class="lbl">Postnr <span class="tag">PostCode</span></label>
+              <input type="text" id="re_postcode" placeholder="0150">
+            </div>
+            <div class="fld">
+              <label class="lbl">Poststed/by <span class="req">*</span> <span class="tag">City</span></label>
+              <input type="text" id="re_city" placeholder="Oslo">
+            </div>
+            <div class="fld">
+              <label class="lbl">Fylke/region <span class="opt">(valgfri)</span> <span class="tag">CountrySubentity</span></label>
+              <input type="text" id="re_subentity" placeholder="Viken">
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-3">
+          <div class="fld">
+            <label class="lbl">MNE-konsernets allment kjente navn <span class="opt">(valgfri)</span> <span class="tag">NameMNEGroup</span></label>
+            <input type="text" id="re_mneName" placeholder="Eksempel Group">
+            <div class="help">Oppgi dersom det allment kjente konsernnavnet avviker fra rapporterende enhets juridiske navn.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Rapporteringsrolle <span class="req">*</span> <span class="tag">ReportingRole</span></label>
+            <select id="re_reportingRole">
+              <option value="CBC701">CBC701 – Øverste konsernspiss (Ultimate Parent Entity) – utveksles til andre land</option>
+              <option value="CBC702">CBC702 – Annet morselskap (Surrogate Parent Entity) – utveksles til andre land</option>
+              <option value="CBC703">CBC703 – Lokal innlevering – internasjonal utveksling (Local Filing)</option>
+              <option value="CBC704">CBC704 – Lokal innlevering – ufullstendig informasjon</option>
+            </select>
+            <div class="help">Øverste konsernspiss (CBC701) er vanligst. Bruk CBC702 dersom annet morselskap rapporterer på vegne av konsernet. CBC703/704 er sekundær rapporteringsplikt.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">DocType – dokumentindikator <span class="req">*</span> <span class="tag">DocTypeIndic</span></label>
+            <select id="re_docTypeIndic">
+              <option value="OECD1">OECD1 – Ny data (produksjon)</option>
+              <option value="OECD2">OECD2 – Korrigerte data (produksjon)</option>
+              <option value="OECD3">OECD3 – Sletting av data (produksjon)</option>
+              <option value="OECD11" selected>OECD11 – Ny testdata (test)</option>
+              <option value="OECD12">OECD12 – Korrigerte testdata (test)</option>
+              <option value="OECD13">OECD13 – Sletting av testdata (test)</option>
+            </select>
+            <div class="help">⚠️ Husk å bruke OECD1 (ikke OECD11) for reelle innleveringer. OECD11 er kun for testdata og vil føre til at oppgaven forkastes i produksjon.</div>
+          </div>
+        </div>
+        <div class="row row-3">
+          <div class="fld">
+            <label class="lbl">Unik dokumentreferanse <span class="req">*</span> <span class="tag">DocRefId</span></label>
+            <input type="text" id="re_docRefId" placeholder="f.eks. NO2024-987654321-RE-001">
+            <div class="help">Unik referanse for dette avsnittet (maks 200 tegn). Brukes ved eventuelle korreksjoner.</div>
+          </div>
+          <div class="fld">
+            <label class="lbl">Regnskapsår – fra dato <span class="req">*</span> <span class="tag">StartDate</span></label>
+            <input type="date" id="re_startDate" value="2024-01-01">
+          </div>
+          <div class="fld">
+            <label class="lbl">Regnskapsår – til dato <span class="req">*</span> <span class="tag">EndDate</span></label>
+            <input type="date" id="re_endDate" value="2024-12-31">
+            <div class="help">Bør tilsvare ReportingPeriod i meldingshode.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SEKSJON 3: CBC RAPPORTER ─── -->
+    <section class="sec" id="sec-rapporter">
+      <div class="sec-hdr">
+        <div class="sec-num">3</div>
+        <div class="sec-hdr-text">
+          <div class="t1">Land-for-land-rapporter <span style="font-family:monospace;font-size:12px;opacity:.8">&lt;CbcReports&gt;</span></div>
+          <div class="t2">Tabell 1 (finansielle nøkkeltall) + Tabell 2 (underliggende enheter) – én blokk per skattejurisdiksjon</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">
+          <strong>Struktur:</strong> Det skal opprettes én rapportblokk per <em>skattejurisdiksjon</em> (land) der konsernet har underliggende enheter. Hver blokk inneholder aggregerte finanstall (Tabell 1) og en liste over underliggende enheter i det aktuelle landet (Tabell 2). Legg til en blokk per land.
+        </div>
+        <div class="warn-box">
+          ⚠️ Alle pengebeløp rapporteres i hele tall uten desimaler (rund av/opp til nærmeste krone/enhet). Konsekvent valuta benyttes gjennom hele rapporten – velg funksjonell valuta fra konsernregnskapet.
+        </div>
+        <div id="cbcReportsContainer"></div>
+        <button class="btn btn-add" onclick="addCbcReport()">＋ Legg til land (skattejurisdiksjon)</button>
+      </div>
+    </section>
+
+    <!-- ─── SEKSJON 4: ANDRE OPPLYSNINGER ─── -->
+    <section class="sec" id="sec-tillegg">
+      <div class="sec-hdr">
+        <div class="sec-num">4</div>
+        <div class="sec-hdr-text">
+          <div class="t1">Andre opplysninger / Tilleggsinformasjon <span style="font-family:monospace;font-size:12px;opacity:.8">&lt;AdditionalInfo&gt;</span></div>
+          <div class="t2">Tabell 3 – Forklaringer, kontekst og ekstra informasjon som fremmer forståelse av rapporten</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">
+          <strong>Når brukes dette feltet?</strong> Bruk AdditionalInfo til å forklare avvik fra konsernregnskapet, oppgi valutakurs ved omregning, informere om datakilde, forklare negativ påløpt skatt, osv. For informasjon som <em>kun</em> gjelder én underliggende enhet, bruk heller OtherEntityInfo i Tabell 2.
+        </div>
+        <div id="additionalInfoContainer"></div>
+        <button class="btn btn-add" onclick="addAdditionalInfo()">＋ Legg til tilleggsinformasjon</button>
+      </div>
+    </section>
+
+    <!-- ─── SEKSJON 5: XML OUTPUT ─── -->
+    <section class="sec" id="sec-xml">
+      <div class="sec-hdr">
+        <div class="sec-num">↓</div>
+        <div class="sec-hdr-text">
+          <div class="t1">Generer XML</div>
+          <div class="t2">Generer ferdig CBC-XML (OECD v2.0) klar for innlevering via Altinn</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="toolbar">
+          <button class="btn btn-primary" onclick="generateXML()">⚙️ Generer XML</button>
+          <button class="btn btn-success" onclick="downloadXML()" id="btn-dl" disabled>⬇️ Last ned XML-fil</button>
+          <button class="btn btn-sec" onclick="copyXML()" id="btn-copy" disabled>📋 Kopier XML</button>
+        </div>
+        <pre class="xml-out" id="xmlOutput">// Trykk «Generer XML» for å se resultatet her.</pre>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+
+const COUNTRIES = [
+  ['AD','Andorra'],['AE','De forente arabiske emirater'],['AF','Afghanistan'],['AG','Antigua og Barbuda'],
+  ['AL','Albania'],['AM','Armenia'],['AO','Angola'],['AR','Argentina'],['AT','Østerrike'],
+  ['AU','Australia'],['AZ','Aserbajdsjan'],['BA','Bosnia-Hercegovina'],['BB','Barbados'],
+  ['BD','Bangladesh'],['BE','Belgia'],['BF','Burkina Faso'],['BG','Bulgaria'],['BH','Bahrain'],
+  ['BJ','Benin'],['BM','Bermuda'],['BN','Brunei'],['BO','Bolivia'],['BR','Brasil'],
+  ['BS','Bahamas'],['BT','Bhutan'],['BW','Botswana'],['BY','Hviterussland'],['BZ','Belize'],
+  ['CA','Canada'],['CD','Kongo (Dem. rep.)'],['CF','Den sentralafrikanske republik'],['CG','Kongo'],
+  ['CH','Sveits'],['CI','Elfenbenskysten'],['CL','Chile'],['CM','Kamerun'],['CN','Kina'],
+  ['CO','Colombia'],['CR','Costa Rica'],['CU','Cuba'],['CV','Kapp Verde'],['CW','Curaçao'],
+  ['CY','Kypros'],['CZ','Tsjekkia'],['DE','Tyskland'],['DJ','Djibouti'],['DK','Danmark'],
+  ['DM','Dominica'],['DO','Den dominikanske republikk'],['DZ','Algerie'],['EC','Ecuador'],
+  ['EE','Estland'],['EG','Egypt'],['ER','Eritrea'],['ES','Spania'],['ET','Etiopia'],
+  ['FI','Finland'],['FJ','Fiji'],['FR','Frankrike'],['GA','Gabon'],['GB','Storbritannia'],
+  ['GD','Grenada'],['GE','Georgia'],['GH','Ghana'],['GM','Gambia'],['GN','Guinea'],
+  ['GQ','Ekvatorial-Guinea'],['GR','Hellas'],['GT','Guatemala'],['GW','Guinea-Bissau'],
+  ['GY','Guyana'],['HK','Hong Kong'],['HN','Honduras'],['HR','Kroatia'],['HT','Haiti'],
+  ['HU','Ungarn'],['ID','Indonesia'],['IE','Irland'],['IL','Israel'],['IN','India'],
+  ['IQ','Irak'],['IR','Iran'],['IS','Island'],['IT','Italia'],['JM','Jamaica'],['JO','Jordan'],
+  ['JP','Japan'],['KE','Kenya'],['KG','Kirgisistan'],['KH','Kambodsja'],['KI','Kiribati'],
+  ['KM','Komorene'],['KN','Saint Kitts og Nevis'],['KR','Sør-Korea'],['KW','Kuwait'],
+  ['KY','Caymanøyene'],['KZ','Kasakhstan'],['LA','Laos'],['LB','Libanon'],['LC','Saint Lucia'],
+  ['LI','Liechtenstein'],['LK','Sri Lanka'],['LR','Liberia'],['LS','Lesotho'],['LT','Litauen'],
+  ['LU','Luxembourg'],['LV','Latvia'],['LY','Libya'],['MA','Marokko'],['MC','Monaco'],
+  ['MD','Moldova'],['ME','Montenegro'],['MG','Madagaskar'],['MK','Nord-Makedonia'],['ML','Mali'],
+  ['MM','Myanmar'],['MN','Mongolia'],['MO','Macao'],['MR','Mauritania'],['MT','Malta'],
+  ['MU','Mauritius'],['MV','Maldivene'],['MW','Malawi'],['MX','Mexico'],['MY','Malaysia'],
+  ['MZ','Mosambik'],['NA','Namibia'],['NE','Niger'],['NG','Nigeria'],['NI','Nicaragua'],
+  ['NL','Nederland'],['NO','Norge'],['NP','Nepal'],['NR','Nauru'],['NZ','New Zealand'],
+  ['OM','Oman'],['PA','Panama'],['PE','Peru'],['PG','Papua Ny-Guinea'],['PH','Filippinene'],
+  ['PK','Pakistan'],['PL','Polen'],['PT','Portugal'],['PW','Palau'],['PY','Paraguay'],
+  ['QA','Qatar'],['RO','Romania'],['RS','Serbia'],['RU','Russland'],['RW','Rwanda'],
+  ['SA','Saudi-Arabia'],['SB','Salomonøyene'],['SC','Seychellene'],['SD','Sudan'],
+  ['SE','Sverige'],['SG','Singapore'],['SI','Slovenia'],['SK','Slovakia'],['SL','Sierra Leone'],
+  ['SM','San Marino'],['SN','Senegal'],['SO','Somalia'],['SR','Surinam'],['SS','Sør-Sudan'],
+  ['ST','São Tomé og Príncipe'],['SV','El Salvador'],['SX','Sint Maarten'],['SY','Syria'],
+  ['SZ','Eswatini'],['TC','Turks- og Caicosøyene'],['TD','Tsjad'],['TG','Togo'],
+  ['TH','Thailand'],['TJ','Tadsjikistan'],['TL','Øst-Timor'],['TM','Turkmenistan'],
+  ['TN','Tunisia'],['TO','Tonga'],['TR','Tyrkia'],['TT','Trinidad og Tobago'],['TV','Tuvalu'],
+  ['TZ','Tanzania'],['UA','Ukraina'],['UG','Uganda'],['US','USA'],['UY','Uruguay'],
+  ['UZ','Usbekistan'],['VC','Saint Vincent og Grenadinene'],['VE','Venezuela'],
+  ['VG','Britiske Jomfruøyer'],['VN','Vietnam'],['VU','Vanuatu'],['WS','Samoa'],
+  ['XK','Kosovo'],['YE','Jemen'],['ZA','Sør-Afrika'],['ZM','Zambia'],['ZW','Zimbabwe']
+];
+
+const CURRENCIES = [
+  ['AED','Dirham (UAE)'],['AUD','Australsk dollar'],['BRL','Brasiliansk real'],
+  ['CAD','Kanadisk dollar'],['CHF','Sveitsisk franc'],['CNY','Kinesisk yuan (renminbi)'],
+  ['CZK','Tsjekkisk krone'],['DKK','Dansk krone'],['EUR','Euro'],['GBP','Britisk pund'],
+  ['HKD','Hongkong-dollar'],['HUF','Ungarsk forint'],['IDR','Indonesisk rupiah'],
+  ['ILS','Israelsk shekel'],['INR','Indisk rupee'],['JPY','Japansk yen'],
+  ['KRW','Sørkoreansk won'],['MXN','Meksikansk peso'],['MYR','Malaysisk ringgit'],
+  ['NOK','Norsk krone'],['NZD','New Zealand-dollar'],['PHP','Filippinsk peso'],
+  ['PLN','Polsk zloty'],['RON','Rumensk leu'],['RUB','Russisk rubel'],
+  ['SAR','Saudi-arabisk riyal'],['SEK','Svensk krone'],['SGD','Singaporsk dollar'],
+  ['THB','Thailandsk baht'],['TRY','Tyrkisk lira'],['TWD','Taiwansk dollar'],
+  ['USD','Amerikansk dollar'],['VND','Vietnamesisk dong'],['ZAR','Sørafrikansk rand']
+];
+
+const BIZ_ACTIVITIES = [
+  ['CBC501','Forskning og utvikling','Research and Development'],
+  ['CBC502','Forvaltning/eierskap av immaterielle rettigheter','Holding or Managing Intellectual Property'],
+  ['CBC503','Innkjøp og anskaffelse','Purchasing or Procurement'],
+  ['CBC504','Produksjon','Manufacturing or Production'],
+  ['CBC505','Salg, markedsføring og distribusjon','Sales, Marketing or Distribution'],
+  ['CBC506','Administrasjon, ledelse og støttefunksjoner','Administrative, Management or Support Services'],
+  ['CBC507','Tjenester til uavhengige parter','Provision of Services to Unrelated Parties'],
+  ['CBC508','Intern konsernfinansiering','Internal Group Finance'],
+  ['CBC509','Regulerte finansielle tjenester','Regulated Financial Services'],
+  ['CBC510','Forsikring','Insurance'],
+  ['CBC511','Eierskap av aksjer og andre egenkapitalinstrumenter','Holding Shares or Other Equity Instruments'],
+  ['CBC512','Passivt selskap (dormant)','Dormant'],
+  ['CBC513','Annet','Other']
+];
+
+const REPORTING_ROLES_ENTITY = [
+  ['CBC801','Øverste morselskap (Ultimate Parent Entity)'],
+  ['CBC802','Rapporterende enhet (Reporting Entity)'],
+  ['CBC803','Begge (Ultimate Parent Entity og Reporting Entity)']
+];
+
+const SUMMARY_REFS = [
+  ['CBC601','Inntekter – uavhengige parter (Revenues – Unrelated)'],
+  ['CBC602','Inntekter – nærstående parter (Revenues – Related)'],
+  ['CBC603','Inntekter – totalt (Revenues – Total)'],
+  ['CBC604','Resultat/tap (Profit or Loss)'],
+  ['CBC605','Betalt skatt (Tax Paid)'],
+  ['CBC606','Påløpt skatt (Tax Accrued)'],
+  ['CBC607','Innskutt egenkapital (Capital)'],
+  ['CBC608','Opptjent egenkapital (Earnings)'],
+  ['CBC609','Antall ansatte (Number of Employees)'],
+  ['CBC610','Fysiske eiendeler (Assets)'],
+  ['CBC611','Navn på MNE-gruppen (Name of MNE Group)']
+];
+
+const DOC_TYPES = [
+  ['OECD1','Ny data (produksjon)'],['OECD2','Korrigerte data (produksjon)'],
+  ['OECD3','Sletting av data (produksjon)'],['OECD11','Ny testdata (test)'],
+  ['OECD12','Korrigerte testdata (test)'],['OECD13','Sletting av testdata (test)']
+];
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+
+let cbcReportCount = 0;
+let additionalInfoCount = 0;
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Set timestamp to now
+  const now = new Date();
+  const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0,16);
+  document.getElementById('ms_timestamp').value = local;
+
+  // Populate country selects
+  populateSelect('re_resCountry', COUNTRIES, 'NO');
+  populateSelect('re_tinIssuedBy', COUNTRIES, 'NO');
+  populateSelect('re_addrCountry', COUNTRIES, 'NO');
+
+  // Add one CbcReport for NO by default
+  addCbcReport('NO');
+});
+
+function populateSelect(id, data, defaultVal) {
+  const sel = document.getElementById(id);
+  if(!sel) return;
+  sel.innerHTML = data.map(([code, name]) =>
+    `<option value="${code}" ${code===defaultVal?'selected':''}>${code} – ${name}</option>`
+  ).join('');
+}
+
+function makeCountrySelect(id, defaultVal='NO') {
+  return `<select id="${id}">${COUNTRIES.map(([code,name])=>
+    `<option value="${code}"${code===defaultVal?' selected':''}>${code} – ${name}</option>`
+  ).join('')}</select>`;
+}
+
+function makeCurrencySelect(id, defaultVal='NOK') {
+  return `<select id="${id}">${CURRENCIES.map(([code,name])=>
+    `<option value="${code}"${code===defaultVal?' selected':''}>${code} – ${name}</option>`
+  ).join('')}</select>`;
+}
+
+function makeDocTypeSelect(id, defaultVal='OECD11') {
+  return `<select id="${id}">${DOC_TYPES.map(([v,l])=>
+    `<option value="${v}"${v===defaultVal?' selected':''}>${v} – ${l}</option>`
+  ).join('')}</select>`;
+}
+
+// ═══════════════════════════════════════
+// MESSAGE TYPE INDIC TOGGLE
+// ═══════════════════════════════════════
+
+function toggleCorrRef() {
+  const val = document.getElementById('ms_messageTypeIndic').value;
+  document.getElementById('corrRefWrap').style.display = val==='CBC402' ? 'block' : 'none';
+}
+
+// ═══════════════════════════════════════
+// CBC REPORTS
+// ═══════════════════════════════════════
+
+function addCbcReport(defaultCountry='') {
+  cbcReportCount++;
+  const id = cbcReportCount;
+  const container = document.getElementById('cbcReportsContainer');
+  const div = document.createElement('div');
+  div.className = 'dyn-wrap';
+  div.id = `cbcReport_${id}`;
+  div.innerHTML = buildCbcReportHTML(id, defaultCountry);
+  container.appendChild(div);
+  populateDynCountry(`cr_country_${id}`, defaultCountry||'NO');
+  populateDynCountry(`cr_docType_${id}`, null, true);
+  addConstEntity(id);
+  updateCbcReportHeader(id);
+}
+
+function populateDynCountry(id, defaultVal, isDocType=false) {
+  const sel = document.getElementById(id);
+  if(!sel) return;
+  if(isDocType) {
+    sel.innerHTML = DOC_TYPES.map(([v,l])=>`<option value="${v}"${v==='OECD11'?' selected':''}>${v} – ${l}</option>`).join('');
+  } else {
+    sel.innerHTML = COUNTRIES.map(([code,name])=>`<option value="${code}"${code===defaultVal?' selected':''}>${code} – ${name}</option>`).join('');
+  }
+}
+
+function buildCbcReportHTML(id, defaultCountry) {
+  const defaultCurr = 'NOK';
+  const moneyField = (label, fieldId, help) => `
+    <div class="fld">
+      <div class="money-label">${label}</div>
+      <div class="money-wrap">
+        <input type="number" id="${fieldId}_amt" placeholder="0" min="-999999999999">
+        ${makeCurrencySelect(`${fieldId}_curr`, defaultCurr)}
+      </div>
+      ${help ? `<div class="help">${help}</div>` : ''}
+    </div>`;
+
+  return `
+  <div class="dyn-hdr" onclick="toggleCollapse('cbcReport_${id}')">
+    <div class="dyn-hdr-l">
+      <span class="badge" id="cr_badge_${id}">—</span>
+      Land-for-land-rapport
+      <span id="cr_name_${id}" style="color:var(--muted);font-weight:400"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="btn btn-danger" onclick="event.stopPropagation();removeCbcReport(${id})">✕ Fjern</button>
+      <span class="caret">▼</span>
+    </div>
+  </div>
+  <div class="dyn-body">
+
+    <div class="sub">
+      <div class="sub-t">🔖 Dokumentspesifikasjon <span style="font-family:monospace;font-weight:400;font-size:10px">&lt;DocSpec&gt;</span></div>
+      <div class="row row-3">
+        <div class="fld">
+          <label class="lbl">Skattejurisdiksjon (land) <span class="req">*</span> <span class="tag">ResCountryCode</span></label>
+          <select id="cr_country_${id}" onchange="updateCbcReportHeader(${id})"></select>
+          <div class="help">Landet alle underliggende enheter i denne blokken er hjemmehørende i for skatteformål.</div>
+        </div>
+        <div class="fld">
+          <label class="lbl">DocType-indikator <span class="req">*</span> <span class="tag">DocTypeIndic</span></label>
+          <select id="cr_docType_${id}"></select>
+          <div class="help">Bruk OECD1 for produksjon, OECD11 for test.</div>
+        </div>
+        <div class="fld">
+          <label class="lbl">Unik dokumentreferanse <span class="req">*</span> <span class="tag">DocRefId</span></label>
+          <input type="text" id="cr_docRefId_${id}" placeholder="f.eks. NO2024-987654321-CBC-${id}">
+        </div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-t">📊 Tabell 1 – Aggregerte finansielle nøkkeltall <span style="font-family:monospace;font-weight:400;font-size:10px">&lt;Summary&gt;</span></div>
+      <div class="info-box">
+        Alle tall er aggregerte summer for <em>alle</em> underliggende enheter som er skattemessig hjemmehørende i den aktuelle skattejurisdiksjonen. Beløp i hele tall uten desimaler. Transaksjoner mellom tilknyttede foretak føres brutto.
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:7px;padding:15px;margin-bottom:10px">
+        <div class="sub-t" style="font-size:11px;margin-bottom:10px">💰 Inntekter <span style="font-family:monospace;font-weight:400;font-size:9px">&lt;Revenues&gt;</span></div>
+        <div class="row row-3">
+          ${moneyField('Fra uavhengige parter <span class="tag">Unrelated</span>', `cr_${id}_rev_unrelated`,
+            'Inntekter fra salg til kunder/parter utenfor konsernet. Inkluder salg av varer, tjenester, royalties, renter, bonuser o.l. til uavhengige parter.')}
+          ${moneyField('Fra nærstående parter <span class="tag">Related</span>', `cr_${id}_rev_related`,
+            'Inntekter fra transaksjoner med tilknyttede foretak innen konsernet. Transaksjoner mellom konsernselskaper summeres uten nettoføring.')}
+          ${moneyField('Totalt <span class="req">*</span> <span class="tag">Total</span>', `cr_${id}_rev_total`,
+            'Totalsum av inntekter fra uavhengige og nærstående parter. Ikke nødvendigvis lik summen av feltene over dersom det er metodeavvik.')}
+        </div>
+      </div>
+      <div class="row row-2">
+        ${moneyField('Resultat før skattekostnad <span class="req">*</span> <span class="tag">ProfitOrLoss</span>', `cr_${id}_profit`,
+          'Resultat (eller tap) før inntektsskatt. Inkluderer alle ekstraordinære inntekter og kostnader. Utbytte fra konsernselskaper inngår ikke. Mottatt konsernbidrag inngår ikke.')}
+        ${moneyField('Betalt inntektsskatt (kontantbasis) <span class="req">*</span> <span class="tag">TaxPaid</span>', `cr_${id}_taxPaid`,
+          'Total faktisk betalt inntektsskatt i regnskapsåret – uavhengig av hvilket år skatten refererer seg til. Inkluderer kildeskatt betalt av andre enheter med hensyn til betalinger til enheten.')}
+      </div>
+      <div class="row row-2">
+        ${moneyField('Påløpt inntektsskatt (inneværende år) <span class="req">*</span> <span class="tag">TaxAccrued</span>', `cr_${id}_taxAccrued`,
+          'Skatt påløpt for inntekter i regnskapsåret. Inkluderer ikke utsatt skatt eller avsetninger for usikker skattegjeld. Bør normalt ikke være negativ.')}
+        ${moneyField('Innskutt egenkapital <span class="req">*</span> <span class="tag">Capital</span>', `cr_${id}_capital`,
+          'Bokført sum av innskutt egenkapital for alle enheter i jurisdiksjonen. Inkluderer selskapskapital, overkurs og annen innskutt egenkapital. I holdingselskap: innskutt egenkapital i holdingselskapet uten å korrigere for datterselskap.')}
+      </div>
+      <div class="row row-3">
+        ${moneyField('Opptjent egenkapital <span class="req">*</span> <span class="tag">Earnings</span>', `cr_${id}_earnings`,
+          'Bokført sum av opptjent egenkapital (tilbakeholdt fortjeneste) per årslutt for alle enheter i jurisdiksjonen. Regnskapslovens begrep «fond og annen opptjent egenkapital» er relevant.')}
+        <div class="fld">
+          <div class="money-label">Antall ansatte <span class="req">*</span> <span class="tag">NbEmployees</span></div>
+          <input type="number" id="cr_${id}_employees" placeholder="0" min="0" style="width:100%">
+          <div class="help">Totalt antall ansatte omregnet til fulltidsstillinger (FTE) for alle enheter i jurisdiksjonen. Kan rapporteres per årslutt, som gjennomsnitt for året eller på annet konsekvent grunnlag.</div>
+        </div>
+        ${moneyField('Fysiske eiendeler (ekskl. kontanter) <span class="req">*</span> <span class="tag">Assets</span>', `cr_${id}_assets`,
+          'Bokført verdi av materielle eiendeler (tangible assets) eksklusiv kontanter og kontantekvivalenter, og eksklusiv immaterielle eiendeler og finansielle eiendeler.')}
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-t">🏢 Tabell 2 – Underliggende enheter <span style="font-family:monospace;font-weight:400;font-size:10px">&lt;ConstEntities&gt;</span></div>
+      <div class="info-box">
+        List opp alle underliggende enheter (datterselskaper, faste driftssteder o.l.) som er hjemmehørende i denne skattejurisdiksjonen. Én rad per enhet.
+      </div>
+      <div id="constEntities_${id}"></div>
+      <button class="btn btn-add" onclick="addConstEntity(${id})">＋ Legg til underliggende enhet</button>
+    </div>
+  </div>`;
+}
+
+function updateCbcReportHeader(id) {
+  const sel = document.getElementById(`cr_country_${id}`);
+  if(!sel) return;
+  const code = sel.value;
+  const name = COUNTRIES.find(c=>c[0]===code);
+  document.getElementById(`cr_badge_${id}`).textContent = code;
+  document.getElementById(`cr_name_${id}`).textContent = name ? `– ${name[1]}` : '';
+}
+
+function removeCbcReport(id) {
+  if(!confirm('Fjerne denne rapporten?')) return;
+  document.getElementById(`cbcReport_${id}`).remove();
+}
+
+function toggleCollapse(id) {
+  document.getElementById(id).classList.toggle('collapsed');
+}
+
+// ═══════════════════════════════════════
+// CONSTITUENT ENTITIES
+// ═══════════════════════════════════════
+
+let entityCount = 0;
+
+function addConstEntity(reportId) {
+  entityCount++;
+  const eid = entityCount;
+  const container = document.getElementById(`constEntities_${reportId}`);
+  const div = document.createElement('div');
+  div.className = 'dyn-wrap';
+  div.id = `entity_${eid}`;
+  div.innerHTML = buildEntityHTML(reportId, eid);
+  container.appendChild(div);
+  // populate country selects inside
+  [`ce_${eid}_resCountry`, `ce_${eid}_tinIssued`, `ce_${eid}_addrCountry`, `ce_${eid}_incorpCountry`].forEach(sid => {
+    const s = document.getElementById(sid);
+    if(s) s.innerHTML = COUNTRIES.map(([code,name])=>`<option value="${code}"${code==='NO'?' selected':''}>${code} – ${name}</option>`).join('');
+  });
+}
+
+function buildEntityHTML(reportId, eid) {
+  const bizActCheckboxes = BIZ_ACTIVITIES.map(([code, norsk, eng]) => `
+    <label class="cb-item">
+      <input type="checkbox" name="biz_${eid}" value="${code}">
+      <span class="cb-lbl"><span class="cb-code">${code}</span> – ${norsk}<br><span style="font-size:11px;color:var(--muted)">${eng}</span></span>
+    </label>`).join('');
+
+  return `
+  <div class="dyn-hdr" onclick="toggleCollapse('entity_${eid}')">
+    <div class="dyn-hdr-l">
+      <span class="badge badge-gray">Enhet ${eid}</span>
+      <span id="entity_name_${eid}" style="color:var(--muted);font-weight:400;font-size:12px">Ny enhet</span>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-danger" onclick="event.stopPropagation();document.getElementById('entity_${eid}').remove()">✕</button>
+      <span class="caret">▼</span>
+    </div>
+  </div>
+  <div class="dyn-body">
+    <div class="row row-3">
+      <div class="fld">
+        <label class="lbl">Hjemland (skattejurisdiksjon) <span class="req">*</span> <span class="tag">ResCountryCode</span></label>
+        <select id="ce_${eid}_resCountry"></select>
+        <div class="help">Landet enheten er skattemessig hjemmehørende i for skatteformål.</div>
+      </div>
+      <div class="fld">
+        <label class="lbl">TIN / org.nr <span class="req">*</span> <span class="tag">TIN</span></label>
+        <input type="text" id="ce_${eid}_tin" placeholder="Skattemessig ID-nummer" oninput="updateEntityName(${eid})">
+      </div>
+      <div class="fld">
+        <label class="lbl">TIN utstedt av <span class="tag">issuedBy</span></label>
+        <select id="ce_${eid}_tinIssued"></select>
+      </div>
+    </div>
+    <div class="row row-3">
+      <div class="fld">
+        <label class="lbl">Fullt navn <span class="req">*</span> <span class="tag">Name</span></label>
+        <input type="text" id="ce_${eid}_name" placeholder="ENHET AS" oninput="updateEntityName(${eid})">
+      </div>
+      <div class="fld">
+        <label class="lbl">Annet ID (EIN/LEI) <span class="opt">(valgfri)</span> <span class="tag">IN</span></label>
+        <input type="text" id="ce_${eid}_in" placeholder="f.eks. LEI-kode">
+      </div>
+      <div class="fld">
+        <label class="lbl">Rolle i MNE-gruppen <span class="opt">(valgfri)</span> <span class="tag">Role</span></label>
+        <select id="ce_${eid}_role">
+          <option value="">– Ikke relevant –</option>
+          ${REPORTING_ROLES_ENTITY.map(([v,l])=>`<option value="${v}">${v} – ${l}</option>`).join('')}
+        </select>
+        <div class="help">Kun aktuelt dersom enheten er morselskap eller rapporterende enhet.</div>
+      </div>
+    </div>
+    <div class="row row-3">
+      <div class="fld">
+        <label class="lbl">Inkorporasjonsland <span class="opt">(valgfri)</span> <span class="tag">IncorpCountryCode</span></label>
+        <select id="ce_${eid}_incorpCountry">
+          <option value="">– Samme som ResCountryCode –</option>
+          ${COUNTRIES.map(([c,n])=>`<option value="${c}">${c} – ${n}</option>`).join('')}
+        </select>
+        <div class="help">Oppgi kun dersom registreringsland/inkorporasjonsland avviker fra skattemessig hjemland. Utelat feltet dersom de er like.</div>
+      </div>
+      <div class="fld">
+        <label class="lbl">Adresse – land <span class="tag">CountryCode</span></label>
+        <select id="ce_${eid}_addrCountry"></select>
+      </div>
+      <div class="fld">
+        <label class="lbl">Adresse – by <span class="tag">City</span></label>
+        <input type="text" id="ce_${eid}_city" placeholder="Oslo">
+      </div>
+    </div>
+    <div class="fld">
+      <label class="lbl">Annen informasjon om enheten <span class="opt">(valgfri)</span> <span class="tag">OtherEntityInfo</span></label>
+      <textarea id="ce_${eid}_otherInfo" placeholder="Fritekst – annen relevant informasjon om denne enheten. Informasjon som gjelder hele konsernet eller flere land/enheter skal i stedet oppgis i Tabell 3 (AdditionalInfo)."></textarea>
+    </div>
+    <div class="fld">
+      <label class="lbl">Viktigste forretningsaktiviteter <span class="req">*</span> <span class="tag">BizActivities</span></label>
+      <div class="help" style="margin-bottom:6px">Velg alle aktiviteter som gjelder for enhetene i denne skattejurisdiksjonen. Minst én må velges.</div>
+      <div class="cb-grid">${bizActCheckboxes}</div>
+    </div>
+  </div>`;
+}
+
+function updateEntityName(eid) {
+  const name = document.getElementById(`ce_${eid}_name`)?.value;
+  const el = document.getElementById(`entity_name_${eid}`);
+  if(el) el.textContent = name || 'Ny enhet';
+}
+
+// ═══════════════════════════════════════
+// ADDITIONAL INFO
+// ═══════════════════════════════════════
+
+function addAdditionalInfo() {
+  additionalInfoCount++;
+  const id = additionalInfoCount;
+  const container = document.getElementById('additionalInfoContainer');
+  const div = document.createElement('div');
+  div.className = 'dyn-wrap';
+  div.id = `addInfo_${id}`;
+
+  const summaryRefOpts = SUMMARY_REFS.map(([v,l])=>`<option value="${v}">${v} – ${l}</option>`).join('');
+  const countryOpts = COUNTRIES.map(([c,n])=>`<option value="${c}">${c} – ${n}</option>`).join('');
+
+  div.innerHTML = `
+  <div class="dyn-hdr" onclick="toggleCollapse('addInfo_${id}')">
+    <div class="dyn-hdr-l"><span class="badge badge-green">Tillegg ${id}</span> Tilleggsinformasjon</div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-danger" onclick="event.stopPropagation();document.getElementById('addInfo_${id}').remove()">✕ Fjern</button>
+      <span class="caret">▼</span>
+    </div>
+  </div>
+  <div class="dyn-body">
+    <div class="row row-2">
+      <div class="fld">
+        <label class="lbl">DocType-indikator <span class="req">*</span> <span class="tag">DocTypeIndic</span></label>
+        <select id="ai_docType_${id}">
+          ${DOC_TYPES.map(([v,l])=>`<option value="${v}"${v==='OECD11'?' selected':''}>${v} – ${l}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fld">
+        <label class="lbl">Unik dokumentreferanse <span class="req">*</span> <span class="tag">DocRefId</span></label>
+        <input type="text" id="ai_docRefId_${id}" placeholder="f.eks. NO2024-987654321-AI-${id}">
+      </div>
+    </div>
+    <div class="fld">
+      <label class="lbl">Tilleggsinformasjon <span class="req">*</span> <span class="tag">OtherInfo</span></label>
+      <textarea id="ai_otherInfo_${id}" rows="4" placeholder="Beskriv her: valutakurs og omregningsmetode, årsak til avvik fra konsernregnskap, årsak til negativ påløpt skatt, konserninterne bidrag mellom jurisdiksjoner, informasjon om regnskapsprinsipper, beløpsgrenser og tilsvarende år, eller annen nødvendig forklaring..."></textarea>
+    </div>
+    <div class="row row-2">
+      <div class="fld">
+        <label class="lbl">Gjelder land <span class="opt">(valgfri)</span> <span class="tag">ResCountryCode</span></label>
+        <select id="ai_country_${id}">
+          <option value="">– Gjelder hele konsernet –</option>
+          ${countryOpts}
+        </select>
+        <div class="help">Angi dersom tilleggsinformasjonen kun gjelder én bestemt skattejurisdiksjon.</div>
+      </div>
+      <div class="fld">
+        <label class="lbl">Gjelder nøkkeltall <span class="opt">(valgfri)</span> <span class="tag">SummaryRef</span></label>
+        <select id="ai_summaryRef_${id}">
+          <option value="">– Ikke relevant –</option>
+          ${summaryRefOpts}
+        </select>
+        <div class="help">Marker hvilken kategori i Tabell 1 informasjonen er knyttet til.</div>
+      </div>
+    </div>
+  </div>`;
+  container.appendChild(div);
+}
+
+// ═══════════════════════════════════════
+// XML GENERATION
+// ═══════════════════════════════════════
+
+let lastXML = '';
+
+function esc(str) {
+  if(!str) return '';
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  if(!el) return '';
+  return el.value || '';
+}
+
+function generateXML() {
+  const lines = [];
+  const i1='  ', i2='    ', i3='      ', i4='        ', i5='          ', i6='            ';
+
+  // Header
+  lines.push('<?xml version="1.0" encoding="UTF-8"?>');
+  lines.push(`<!-- Generert av LLR Testskjema – ${new Date().toLocaleString('no-NO')} -->`);
+  lines.push('<n1:CBC_OECD');
+  lines.push('  xmlns:n1="urn:oecd:ties:cbc:v2"');
+  lines.push('  xmlns:n2="urn:oecd:ties:cbcstf:v5"');
+  lines.push('  version="2">');
+
+  // MessageSpec
+  lines.push(`${i1}<n1:MessageSpec>`);
+  if(val('ms_sendingEntityIN')) lines.push(`${i2}<n1:SendingEntityIN>${esc(val('ms_sendingEntityIN'))}</n1:SendingEntityIN>`);
+  lines.push(`${i2}<n1:TransmittingCountry>NO</n1:TransmittingCountry>`);
+  lines.push(`${i2}<n1:ReceivingCountry>NO</n1:ReceivingCountry>`);
+  lines.push(`${i2}<n1:MessageType>CBC</n1:MessageType>`);
+  lines.push(`${i2}<n1:Language>EN</n1:Language>`);
+  if(val('ms_warning')) lines.push(`${i2}<n1:Warning>${esc(val('ms_warning'))}</n1:Warning>`);
+  if(val('ms_contact')) lines.push(`${i2}<n1:Contact>${esc(val('ms_contact'))}</n1:Contact>`);
+  lines.push(`${i2}<n1:MessageRefId>${esc(val('ms_messageRefId'))}</n1:MessageRefId>`);
+  lines.push(`${i2}<n1:MessageTypeIndic>${val('ms_messageTypeIndic')}</n1:MessageTypeIndic>`);
+  if(val('ms_messageTypeIndic')==='CBC402' && val('ms_corrMessageRefId'))
+    lines.push(`${i2}<n1:CorrMessageRefId>${esc(val('ms_corrMessageRefId'))}</n1:CorrMessageRefId>`);
+  lines.push(`${i2}<n1:ReportingPeriod>${val('ms_reportingPeriod')}</n1:ReportingPeriod>`);
+  const ts = val('ms_timestamp').replace('T','T') + ':00';
+  lines.push(`${i2}<n1:Timestamp>${ts}</n1:Timestamp>`);
+  lines.push(`${i1}</n1:MessageSpec>`);
+
+  // CbcBody
+  lines.push(`${i1}<n1:CbcBody>`);
+
+  // ReportingEntity
+  lines.push(`${i2}<n1:ReportingEntity>`);
+  lines.push(`${i3}<n1:Entity>`);
+  lines.push(`${i4}<n1:ResCountryCode>${val('re_resCountry')}</n1:ResCountryCode>`);
+  lines.push(`${i4}<n1:TIN issuedBy="${val('re_tinIssuedBy')}">${esc(val('re_tin'))}</n1:TIN>`);
+  if(val('re_in')) {
+    const inType = val('re_inType') ? ` INType="${esc(val('re_inType'))}"` : '';
+    lines.push(`${i4}<n1:IN issuedBy="${val('re_tinIssuedBy')}"${inType}>${esc(val('re_in'))}</n1:IN>`);
+  }
+  lines.push(`${i4}<n1:Name>${esc(val('re_name'))}</n1:Name>`);
+  // Address
+  lines.push(`${i4}<n1:Address>`);
+  lines.push(`${i5}<n1:CountryCode>${val('re_addrCountry')}</n1:CountryCode>`);
+  lines.push(`${i5}<n1:AddressFix>`);
+  if(val('re_street')) lines.push(`${i6}<n1:Street>${esc(val('re_street'))}</n1:Street>`);
+  if(val('re_building')) lines.push(`${i6}<n1:BuildingIdentifier>${esc(val('re_building'))}</n1:BuildingIdentifier>`);
+  if(val('re_postcode')) lines.push(`${i6}<n1:PostCode>${esc(val('re_postcode'))}</n1:PostCode>`);
+  lines.push(`${i6}<n1:City>${esc(val('re_city')||'Oslo')}</n1:City>`);
+  if(val('re_subentity')) lines.push(`${i6}<n1:CountrySubentity>${esc(val('re_subentity'))}</n1:CountrySubentity>`);
+  lines.push(`${i5}</n1:AddressFix>`);
+  lines.push(`${i4}</n1:Address>`);
+  lines.push(`${i3}</n1:Entity>`);
+  if(val('re_mneName')) lines.push(`${i3}<n1:NameMNEGroup>${esc(val('re_mneName'))}</n1:NameMNEGroup>`);
+  lines.push(`${i3}<n1:ReportingRole>${val('re_reportingRole')}</n1:ReportingRole>`);
+  lines.push(`${i3}<n1:ReportingPeriod>`);
+  lines.push(`${i4}<n1:StartDate>${val('re_startDate')}</n1:StartDate>`);
+  lines.push(`${i4}<n1:EndDate>${val('re_endDate')}</n1:EndDate>`);
+  lines.push(`${i3}</n1:ReportingPeriod>`);
+  lines.push(`${i3}<n1:DocSpec>`);
+  lines.push(`${i4}<n2:DocTypeIndic>${val('re_docTypeIndic')}</n2:DocTypeIndic>`);
+  lines.push(`${i4}<n2:DocRefId>${esc(val('re_docRefId'))}</n2:DocRefId>`);
+  lines.push(`${i3}</n1:DocSpec>`);
+  lines.push(`${i2}</n1:ReportingEntity>`);
+
+  // CbcReports
+  document.querySelectorAll('[id^="cbcReport_"]').forEach(wrap => {
+    const id = wrap.id.replace('cbcReport_','');
+    const countryCode = val(`cr_country_${id}`);
+    if(!countryCode) return;
+
+    lines.push(`${i2}<n1:CbcReports>`);
+    lines.push(`${i3}<n1:DocSpec>`);
+    lines.push(`${i4}<n2:DocTypeIndic>${val(`cr_docType_${id}`)}</n2:DocTypeIndic>`);
+    lines.push(`${i4}<n2:DocRefId>${esc(val(`cr_docRefId_${id}`))}</n2:DocRefId>`);
+    lines.push(`${i3}</n1:DocSpec>`);
+    lines.push(`${i3}<n1:ResCountryCode>${countryCode}</n1:ResCountryCode>`);
+
+    // Summary
+    const curr = (fid) => {
+      const sel = document.getElementById(`${fid}_curr`);
+      return sel ? sel.value : 'NOK';
+    };
+    const amt = (fid) => {
+      const inp = document.getElementById(`${fid}_amt`);
+      return inp ? (inp.value||'0') : '0';
+    };
+    lines.push(`${i3}<n1:Summary>`);
+    lines.push(`${i4}<n1:Revenues>`);
+    lines.push(`${i5}<n1:Unrelated currCode="${curr(`cr_${id}_rev_unrelated`)}">${amt(`cr_${id}_rev_unrelated`)}</n1:Unrelated>`);
+    lines.push(`${i5}<n1:Related currCode="${curr(`cr_${id}_rev_related`)}">${amt(`cr_${id}_rev_related`)}</n1:Related>`);
+    lines.push(`${i5}<n1:Total currCode="${curr(`cr_${id}_rev_total`)}">${amt(`cr_${id}_rev_total`)}</n1:Total>`);
+    lines.push(`${i4}</n1:Revenues>`);
+    lines.push(`${i4}<n1:ProfitOrLoss currCode="${curr(`cr_${id}_profit`)}">${amt(`cr_${id}_profit`)}</n1:ProfitOrLoss>`);
+    lines.push(`${i4}<n1:TaxPaid currCode="${curr(`cr_${id}_taxPaid`)}">${amt(`cr_${id}_taxPaid`)}</n1:TaxPaid>`);
+    lines.push(`${i4}<n1:TaxAccrued currCode="${curr(`cr_${id}_taxAccrued`)}">${amt(`cr_${id}_taxAccrued`)}</n1:TaxAccrued>`);
+    lines.push(`${i4}<n1:Capital currCode="${curr(`cr_${id}_capital`)}">${amt(`cr_${id}_capital`)}</n1:Capital>`);
+    lines.push(`${i4}<n1:Earnings currCode="${curr(`cr_${id}_earnings`)}">${amt(`cr_${id}_earnings`)}</n1:Earnings>`);
+    lines.push(`${i4}<n1:NbEmployees>${val(`cr_${id}_employees`)||'0'}</n1:NbEmployees>`);
+    lines.push(`${i4}<n1:Assets currCode="${curr(`cr_${id}_assets`)}">${amt(`cr_${id}_assets`)}</n1:Assets>`);
+    lines.push(`${i3}</n1:Summary>`);
+
+    // ConstEntities
+    wrap.querySelectorAll('[id^="entity_"]').forEach(eWrap => {
+      const eid = eWrap.id.replace('entity_','');
+      const ceName = val(`ce_${eid}_name`);
+      if(!ceName) return;
+
+      lines.push(`${i3}<n1:ConstEntities>`);
+      lines.push(`${i4}<n1:ConstEntity>`);
+      lines.push(`${i5}<n1:ResCountryCode>${val(`ce_${eid}_resCountry`)}</n1:ResCountryCode>`);
+      lines.push(`${i5}<n1:TIN issuedBy="${val(`ce_${eid}_tinIssued`)}">${esc(val(`ce_${eid}_tin`))}</n1:TIN>`);
+      if(val(`ce_${eid}_in`)) lines.push(`${i5}<n1:IN issuedBy="${val(`ce_${eid}_tinIssued`)}">${esc(val(`ce_${eid}_in`))}</n1:IN>`);
+      lines.push(`${i5}<n1:Name>${esc(ceName)}</n1:Name>`);
+      // Address
+      const city = val(`ce_${eid}_city`);
+      if(city) {
+        lines.push(`${i5}<n1:Address>`);
+        lines.push(`${i6}<n1:CountryCode>${val(`ce_${eid}_addrCountry`)}</n1:CountryCode>`);
+        lines.push(`${i6}<n1:AddressFix>`);
+        lines.push(`${i6}  <n1:City>${esc(city)}</n1:City>`);
+        lines.push(`${i6}</n1:AddressFix>`);
+        lines.push(`${i5}</n1:Address>`);
+      }
+      lines.push(`${i4}</n1:ConstEntity>`);
+      const role = val(`ce_${eid}_role`);
+      if(role) lines.push(`${i4}<n1:Role>${role}</n1:Role>`);
+      const incorp = val(`ce_${eid}_incorpCountry`);
+      if(incorp) lines.push(`${i4}<n1:IncorpCountryCode>${incorp}</n1:IncorpCountryCode>`);
+      // BizActivities – at least one required
+      const checked = Array.from(eWrap.querySelectorAll(`input[name="biz_${eid}"]:checked`)).map(c=>c.value);
+      if(checked.length===0) checked.push('CBC513'); // fallback Other
+      checked.forEach(c => lines.push(`${i4}<n1:BizActivities>${c}</n1:BizActivities>`));
+      if(val(`ce_${eid}_otherInfo`)) lines.push(`${i4}<n1:OtherEntityInfo>${esc(val(`ce_${eid}_otherInfo`))}</n1:OtherEntityInfo>`);
+      lines.push(`${i3}</n1:ConstEntities>`);
+    });
+
+    lines.push(`${i2}</n1:CbcReports>`);
+  });
+
+  // AdditionalInfo
+  document.querySelectorAll('[id^="addInfo_"]').forEach(aiWrap => {
+    const id = aiWrap.id.replace('addInfo_','');
+    const otherInfo = val(`ai_otherInfo_${id}`);
+    if(!otherInfo) return;
+    lines.push(`${i2}<n1:AdditionalInfo>`);
+    lines.push(`${i3}<n1:DocSpec>`);
+    lines.push(`${i4}<n2:DocTypeIndic>${val(`ai_docType_${id}`)}</n2:DocTypeIndic>`);
+    lines.push(`${i4}<n2:DocRefId>${esc(val(`ai_docRefId_${id}`))}</n2:DocRefId>`);
+    lines.push(`${i3}</n1:DocSpec>`);
+    lines.push(`${i3}<n1:OtherInfo>${esc(otherInfo)}</n1:OtherInfo>`);
+    const aiCountry = val(`ai_country_${id}`);
+    if(aiCountry) lines.push(`${i3}<n1:ResCountryCode>${aiCountry}</n1:ResCountryCode>`);
+    const aiRef = val(`ai_summaryRef_${id}`);
+    if(aiRef) lines.push(`${i3}<n1:SummaryRef>${aiRef}</n1:SummaryRef>`);
+    lines.push(`${i2}</n1:AdditionalInfo>`);
+  });
+
+  lines.push(`${i1}</n1:CbcBody>`);
+  lines.push('</n1:CBC_OECD>');
+
+  lastXML = lines.join('\n');
+  document.getElementById('xmlOutput').textContent = lastXML;
+  document.getElementById('btn-dl').disabled = false;
+  document.getElementById('btn-copy').disabled = false;
+  document.getElementById('sec-xml').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function downloadXML() {
+  if(!lastXML) return;
+  const blob = new Blob([lastXML], {type:'application/xml'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const period = val('ms_reportingPeriod').substring(0,4) || 'xxxx';
+  const org = val('ms_sendingEntityIN') || 'org';
+  a.download = `LLR_CBC_${org}_${period}.xml`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function copyXML() {
+  if(!lastXML) return;
+  navigator.clipboard.writeText(lastXML).then(()=>alert('XML kopiert til utklippstavlen ✓'));
+}
+</script>
+</body>
+</html>
