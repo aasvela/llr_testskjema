@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Plattforminformasjon (DPI) – Testskjema</title>
+<style>
+:root{
+  --p:#1a4f7a;--pl:#2471a3;--bg:#f0f4f8;--card:#fff;--border:#cfd8e0;
+  --text:#1c2a38;--muted:#607080;--info-bg:#eaf4fb;--info-border:#aed6f1;
+  --ok:#1e8449;--warn:#7d5a00;--warn-bg:#fef9e7;--warn-border:#f0c040;
+  --danger:#c0392b;--alt:#f4f8fb;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65}
+
+.hdr{background:var(--p);color:#fff;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hdr-i{max-width:1380px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:14px}
+.logo{background:#fff;color:var(--p);font-weight:800;font-size:10px;letter-spacing:.5px;padding:4px 9px;border-radius:4px;flex-shrink:0}
+.hdr-i h1{font-size:17px;font-weight:700}
+.hdr-i p{font-size:11px;opacity:.75}
+.hdr-tag{margin-left:auto;background:rgba(255,255,255,.15);padding:3px 12px;border-radius:14px;font-size:11px;flex-shrink:0}
+
+.layout{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:245px 1fr;gap:22px;padding:22px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+
+.sidebar{position:sticky;top:52px;height:fit-content;max-height:calc(100vh - 64px);overflow-y:auto}
+.nav-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.nav-card h3{padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);background:#f7f9fb;border-bottom:1px solid var(--border)}
+.nav-a{display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;color:var(--text);font-size:13px;border-bottom:1px solid #f0f2f4;transition:background .12s}
+.nav-a:hover{background:var(--info-bg)}
+.nav-n{width:22px;height:22px;border-radius:50%;background:var(--p);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.sec{background:var(--card);border:1px solid var(--border);border-radius:9px;margin-bottom:22px;overflow:hidden}
+.sec-hdr{padding:14px 22px;background:linear-gradient(135deg,var(--p) 0%,var(--pl) 100%);color:#fff;display:flex;align-items:center;gap:12px}
+.sec-num{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0}
+.t1{font-size:15px;font-weight:700}.t2{font-size:11px;opacity:.8;margin-top:1px}
+.sec-body{padding:22px}
+
+.row{display:grid;gap:14px;margin-bottom:14px}
+.r2{grid-template-columns:repeat(2,1fr)}.r3{grid-template-columns:repeat(3,1fr)}.r4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:700px){.r2,.r3,.r4{grid-template-columns:1fr}}
+
+label.lbl{display:block;font-weight:600;font-size:12.5px;margin-bottom:4px;color:var(--text)}
+label.lbl .req{color:var(--danger);margin-left:1px}
+label.lbl .opt{color:var(--muted);font-weight:400;font-size:11px;margin-left:4px}
+label.lbl .tag{font-family:monospace;font-size:10px;background:#edf2f7;padding:1px 5px;border-radius:3px;color:var(--p);margin-left:5px;border:1px solid #cbd5e0}
+
+input,select,textarea{width:100%;padding:7px 11px;border:1px solid var(--border);border-radius:6px;font-size:13.5px;font-family:inherit;background:#fff;color:var(--text);transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pl);box-shadow:0 0 0 3px rgba(36,113,163,.14)}
+input[readonly]{background:#f5f7fa;color:var(--muted);cursor:default}
+input[type=number]{width:100%}
+textarea{min-height:60px;resize:vertical}
+
+.help{font-size:11.5px;color:var(--muted);margin-top:3px}
+.info-box{background:var(--info-bg);border:1px solid var(--info-border);border-radius:6px;padding:9px 13px;font-size:12px;color:#1a5276;margin:6px 0 10px}
+.warn-box{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:6px;padding:9px 13px;font-size:12px;color:var(--warn);margin:6px 0 10px}
+
+.sub{background:#f9fbfd;border:1px solid #dde6ef;border-radius:7px;padding:15px;margin-bottom:14px}
+.sub-t{font-size:11.5px;font-weight:700;color:var(--p);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+
+/* TOGGLE SWITCH */
+.toggle-wrap{display:flex;gap:0;margin-bottom:14px;border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.toggle-btn{flex:1;padding:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);background:var(--bg);transition:all .15s;border:none}
+.toggle-btn.active{background:var(--p);color:#fff}
+
+/* QUARTERLY GRID */
+.q-grid{display:grid;grid-template-columns:160px repeat(4,1fr);gap:6px;align-items:center;margin-bottom:4px}
+.q-grid .q-lbl{font-size:12px;font-weight:600;color:var(--text);padding-right:8px}
+.q-grid .q-hdr{font-size:11px;font-weight:700;color:#fff;background:var(--p);text-align:center;padding:4px;border-radius:4px}
+.q-grid input{padding:5px 8px;font-size:12px}
+
+/* MONEY inline */
+.money-wrap{display:grid;grid-template-columns:1fr 80px;gap:5px}
+
+/* DYNAMIC */
+.dyn-wrap{border:1px solid var(--border);border-radius:8px;margin-bottom:14px}
+.dyn-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:#f7f9fb;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.dyn-hdr-l{display:flex;align-items:center;gap:10px;font-weight:600;font-size:13px}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700}
+.b-blue{background:var(--p);color:#fff}.b-green{background:var(--ok);color:#fff}.b-gray{background:var(--muted);color:#fff}.b-orange{background:#e67e22;color:#fff}
+.dyn-body{padding:18px}
+.caret{font-size:10px;transition:transform .2s;display:inline-block}
+.collapsed>.dyn-hdr .caret{transform:rotate(-90deg)}
+.collapsed>.dyn-body{display:none}
+
+/* CHECKBOXES */
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:5px;margin-top:6px}
+.cb-item{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:background .1s}
+.cb-item:hover,.cb-item.checked{background:var(--info-bg)}
+.cb-item input{width:auto;flex-shrink:0;cursor:pointer}
+.cb-item label{margin:0;font-weight:400;cursor:pointer;font-size:13px}
+.cb-code{font-family:monospace;font-size:10px;color:var(--p);font-weight:600}
+
+/* BUTTONS */
+.btn{padding:7px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+.btn-p{background:var(--p);color:#fff}.btn-p:hover{background:var(--pl)}
+.btn-ok{background:var(--ok);color:#fff}.btn-ok:hover{background:#176038}
+.btn-d{background:var(--danger);color:#fff;padding:5px 11px;font-size:12px}.btn-d:hover{background:#a93226}
+.btn-sec{background:#fff;color:var(--p);border:1px solid var(--p)}.btn-sec:hover{background:var(--info-bg)}
+.btn-add{width:100%;justify-content:center;padding:9px;background:#e8f8f5;color:var(--ok);border:1.5px dashed var(--ok);border-radius:6px;margin-top:8px}
+.btn-add:hover{background:#d5f5e3}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+
+.sep{height:1px;background:var(--border);margin:16px 0}
+
+.activity-section{border:1.5px solid var(--pl);border-radius:7px;padding:14px;margin-bottom:10px}
+.activity-title{font-size:12px;font-weight:700;color:var(--pl);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
+
+.xml-out{background:#1e2130;color:#abb2bf;padding:18px;border-radius:7px;font-family:'Consolas','Monaco',monospace;font-size:11.5px;line-height:1.7;overflow:auto;max-height:520px;white-space:pre;tab-size:2}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-i">
+    <div class="logo">SKATTEETATEN</div>
+    <div>
+      <h1>Digital Plattforminformasjon (DPI) – Testskjema</h1>
+      <p>Tredjepartsopplysninger fra plattformoperatører · OECD Model Rules (DAC7) · XML Schema v1.0</p>
+    </div>
+    <div class="hdr-tag">⚗️ Funksjonell prototype</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="nav-card">
+      <h3>Seksjoner</h3>
+      <a class="nav-a" href="#s1"><span class="nav-n">1</span> Meldingshode</a>
+      <a class="nav-a" href="#s2"><span class="nav-n">2</span> Plattformoperatør</a>
+      <a class="nav-a" href="#s3"><span class="nav-n">3</span> Rapporterbare selgere</a>
+      <a class="nav-a" href="#s4"><span class="nav-n">↓</span> Generer XML</a>
+    </div>
+    <div style="margin-top:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:11.5px;color:var(--muted)">
+      <strong style="display:block;color:var(--text);margin-bottom:5px">ℹ️ Om DPI</strong>
+      Plattformoperatører (Airbnb, Finn, Uber, m.fl.) rapporterer inntekter for selgere som bruker plattformen. Rapporten sendes som XML til Skatteetaten.<br><br>
+      Felt merket <span style="color:var(--danger)">*</span> er påkrevde (Validation). Felt uten markering er Optional.
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ─── 1: MELDINGSHODE ─── -->
+    <section class="sec" id="s1">
+      <div class="sec-hdr">
+        <div class="sec-num">1</div>
+        <div><div class="t1">Meldingshode <span style="font-family:monospace;font-size:11px;opacity:.8">&lt;MessageSpec&gt;</span></div>
+        <div class="t2">Teknisk metadata – hvem sender, hvilken periode og type melding</div></div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">Meldingshode identifiserer meldingen. TransmittingCountry, ReceivingCountry og MessageType er faste verdier for norske innleveringer.</div>
+        <div class="row r4">
+          <div>
+            <label class="lbl">SendingEntityIN <span class="opt">(valgfri)</span></label>
+            <input type="text" id="ms_seid" placeholder="Org.nr til plattformoperatør">
+            <div class="help">Brukes ved domestic rapportering. Identifiserer plattformoperatøren som sender.</div>
+          </div>
+          <div>
+            <label class="lbl">TransmittingCountry <span class="req">*</span></label>
+            <input type="text" value="NO" readonly>
+          </div>
+          <div>
+            <label class="lbl">ReceivingCountry <span class="req">*</span></label>
+            <input type="text" value="NO" readonly>
+          </div>
+          <div>
+            <label class="lbl">MessageType <span class="req">*</span></label>
+            <select id="ms_type">
+              <option value="DPI">DPI – OECD Model Rules</option>
+              <option value="DAC7">DAC7 – EU DIR2021/514</option>
+            </select>
+          </div>
+        </div>
+        <div class="row r3">
+          <div>
+            <label class="lbl">MessageRefId <span class="req">*</span></label>
+            <input type="text" id="ms_refid" placeholder="NO2026NO-123456789-001">
+            <div class="help">Unik meldingsidentifikator. Format: avsenderland + år + mottakerland + unik ID (maks 170 tegn).</div>
+          </div>
+          <div>
+            <label class="lbl">MessageTypeIndic <span class="req">*</span></label>
+            <select id="ms_indic" onchange="toggleCorrField()">
+              <option value="DPI401">DPI401 – Ny/tilleggsinformasjon</option>
+              <option value="DPI402">DPI402 – Korreksjon/sletting av tidligere sendt</option>
+              <option value="DPI403">DPI403 – Ingen data å rapportere (nil report)</option>
+            </select>
+            <div class="help">DPI401 for ordinær innsendelse. DPI402 for korreksjoner. DPI403 sender tom DPIBody.</div>
+          </div>
+          <div>
+            <label class="lbl">ReportingPeriod <span class="req">*</span></label>
+            <input type="date" id="ms_period" value="2026-12-31">
+            <div class="help">Siste dag i rapporteringsperioden (kalenderåret). Format ÅÅÅÅ-MM-DD.</div>
+          </div>
+        </div>
+        <div class="row r3">
+          <div>
+            <label class="lbl">Timestamp <span class="req">*</span></label>
+            <input type="datetime-local" id="ms_ts">
+          </div>
+          <div>
+            <label class="lbl">Warning <span class="opt">(valgfri)</span></label>
+            <input type="text" id="ms_warn" placeholder="Evt. forbehold om innholdet">
+          </div>
+          <div>
+            <label class="lbl">Contact <span class="opt">(valgfri)</span></label>
+            <input type="text" id="ms_contact" placeholder="Navn og kontakt til avsender">
+          </div>
+        </div>
+        <div id="corrFieldWrap" style="display:none">
+          <label class="lbl">CorrMessageRefId <span class="opt">(valgfri – ved DPI402)</span></label>
+          <input type="text" id="ms_corrRef" placeholder="Ref til melding som korrigeres">
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 2: PLATTFORMOPERATØR ─── -->
+    <section class="sec" id="s2">
+      <div class="sec-hdr">
+        <div class="sec-num">2</div>
+        <div><div class="t1">Plattformoperatør <span style="font-family:monospace;font-size:11px;opacity:.8">&lt;PlatformOperator&gt;</span></div>
+        <div class="t2">Den rapporteringspliktige plattformen (Airbnb, Finn.no, Uber, Vipps, osv.)</div></div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">
+          Plattformoperatøren er det foretaket som driver den digitale plattformen og har plikt til å rapportere selgerinntekter. Adressen skal være registrert forretningsadresse (OECD304).
+        </div>
+        <div class="sub">
+          <div class="sub-t">🏢 Identifikasjon</div>
+          <div class="row r3">
+            <div>
+              <label class="lbl">ResCountryCode <span class="opt">(valgfri – Mandatory)</span></label>
+              <select id="po_rcc"><!-- JS --></select>
+              <div class="help">Skattejurisdiksjon for operatøren. For EU-rapportering obligatorisk.</div>
+            </div>
+            <div>
+              <label class="lbl">TIN <span class="req">*</span></label>
+              <input type="text" id="po_tin" placeholder="Org.nr / skattenummer">
+              <div class="help">Skattemessig identifikasjonsnummer utstedt av hjemlandets skattemyndighet.</div>
+            </div>
+            <div>
+              <label class="lbl">TIN utstedt av</label>
+              <select id="po_tin_by"><!-- JS --></select>
+            </div>
+          </div>
+          <div class="row r3">
+            <div>
+              <label class="lbl">VAT-nummer <span class="opt">(valgfri – Mandatory)</span></label>
+              <input type="text" id="po_vat" placeholder="MVA-nummer">
+            </div>
+            <div>
+              <label class="lbl">Juridisk navn <span class="req">*</span> <span class="tag">Name</span></label>
+              <input type="text" id="po_name" placeholder="LEIE TING AS">
+            </div>
+            <div>
+              <label class="lbl">Plattformens handelsnavn <span class="opt">(valgfri – Mandatory)</span> <span class="tag">PlatformBusinessName</span></label>
+              <input type="text" id="po_bizname" placeholder="www.leietingas.no">
+              <div class="help">Navn(ene) på plattformen slik selgere og brukere kjenner den.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sub">
+          <div class="sub-t">📍 Adresse <span style="font-family:monospace;font-weight:400;font-size:9px">&lt;Address legalAddressType="OECD304"&gt;</span></div>
+          <div class="info-box" style="margin-top:0">Plattformoperatørens adresse skal alltid være registrert forretningsadresse (OECD304 – registeredOffice).</div>
+          <div class="row r4">
+            <div>
+              <label class="lbl">Land <span class="req">*</span></label>
+              <select id="po_addr_cc"><!-- JS --></select>
+            </div>
+            <div>
+              <label class="lbl">Gate <span class="tag">Street</span></label>
+              <input type="text" id="po_street" placeholder="Veien">
+            </div>
+            <div>
+              <label class="lbl">Byggnr <span class="tag">BuildingIdentifier</span></label>
+              <input type="text" id="po_building" placeholder="4">
+            </div>
+            <div>
+              <label class="lbl">Postnr <span class="tag">PostCode</span></label>
+              <input type="text" id="po_post" placeholder="4800">
+            </div>
+          </div>
+          <div class="row r2">
+            <div>
+              <label class="lbl">By <span class="req">*</span> <span class="tag">City</span></label>
+              <input type="text" id="po_city" placeholder="Oslo">
+            </div>
+            <div>
+              <label class="lbl">AssumedReporting <span class="opt">(valgfri – Mandatory)</span></label>
+              <select id="po_assumed">
+                <option value="false">false – Plattformen rapporterer selv for alle sine selgere</option>
+                <option value="true">true – En annen plattformoperatør rapporterer på vegne av denne</option>
+              </select>
+              <div class="help">Settes til true dersom en annen plattformoperatør har overtatt rapporteringsplikten.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sub">
+          <div class="sub-t">🔖 DocSpec</div>
+          <div class="row r3">
+            <div>
+              <label class="lbl">DocTypeIndic <span class="req">*</span></label>
+              <select id="po_doctype">
+                <option value="OECD1">OECD1 – Ny data (produksjon)</option>
+                <option value="OECD2">OECD2 – Korrigerte data</option>
+                <option value="OECD3">OECD3 – Sletting av data</option>
+                <option value="OECD0">OECD0 – Resend (uten endring)</option>
+                <option value="OECD11" selected>OECD11 – Ny testdata</option>
+                <option value="OECD12">OECD12 – Korrigerte testdata</option>
+                <option value="OECD13">OECD13 – Sletting av testdata</option>
+              </select>
+              <div class="help">⚠️ Bruk OECD1 for reelle innleveringer. OECD11 er kun for testdata.</div>
+            </div>
+            <div>
+              <label class="lbl">DocRefId <span class="req">*</span></label>
+              <input type="text" id="po_docref" placeholder="NO2026NO-123456789-PO-001">
+            </div>
+            <div>
+              <label class="lbl">CorrDocRefId <span class="opt">(valgfri – ved korreksjon)</span></label>
+              <input type="text" id="po_corrdocref" placeholder="Ref til tidligere DocRefId">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 3: SELGERE ─── -->
+    <section class="sec" id="s3">
+      <div class="sec-hdr">
+        <div class="sec-num">3</div>
+        <div><div class="t1">Rapporterbare selgere <span style="font-family:monospace;font-size:11px;opacity:.8">&lt;ReportableSeller&gt;</span></div>
+        <div class="t2">Privatpersoner eller foretak som har mottatt vederlag via plattformen i rapporteringsperioden</div></div>
+      </div>
+      <div class="sec-body">
+        <div class="info-box">
+          En <strong>selger</strong> er en person eller et foretak som bruker plattformen til å tilby varer eller tjenester mot betaling. For hver selger rapporteres identitet, finansiell konto og alle relevante aktiviteter i rapporteringsperioden, fordelt per kvartal.
+        </div>
+        <div class="warn-box">
+          ⚠️ Alle pengebeløp rapporteres per kvartal (Q1–Q4) i hele tall uten desimaler.
+        </div>
+        <div id="sellersContainer"></div>
+        <button class="btn btn-add" onclick="addSeller()">＋ Legg til selger (person eller foretak)</button>
+      </div>
+    </section>
+
+    <!-- ─── 4: XML ─── -->
+    <section class="sec" id="s4">
+      <div class="sec-hdr">
+        <div class="sec-num">↓</div>
+        <div><div class="t1">Generer XML</div>
+        <div class="t2">Produser gyldig DPI XML (OECD v1.0) klar for innlevering</div></div>
+      </div>
+      <div class="sec-body">
+        <div class="toolbar">
+          <button class="btn btn-p" onclick="generateXML()">⚙️ Generer XML</button>
+          <button class="btn btn-ok" onclick="downloadXML()" id="btn-dl" disabled>⬇️ Last ned</button>
+          <button class="btn btn-sec" onclick="copyXML()" id="btn-cp" disabled>📋 Kopier</button>
+        </div>
+        <pre class="xml-out" id="xmlOut">// Trykk «Generer XML» for å se resultatet her.</pre>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// ═══════════════════════════════════
+// DATA
+// ═══════════════════════════════════
+const COUNTRIES=[['AD','Andorra'],['AE','De forente arabiske emirater'],['AF','Afghanistan'],['AL','Albania'],['AM','Armenia'],['AO','Angola'],['AR','Argentina'],['AT','Østerrike'],['AU','Australia'],['AZ','Aserbajdsjan'],['BA','Bosnia-Hercegovina'],['BB','Barbados'],['BD','Bangladesh'],['BE','Belgia'],['BG','Bulgaria'],['BH','Bahrain'],['BM','Bermuda'],['BN','Brunei'],['BO','Bolivia'],['BR','Brasil'],['BS','Bahamas'],['BW','Botswana'],['BY','Hviterussland'],['BZ','Belize'],['CA','Canada'],['CH','Sveits'],['CL','Chile'],['CM','Kamerun'],['CN','Kina'],['CO','Colombia'],['CR','Costa Rica'],['CU','Cuba'],['CY','Kypros'],['CZ','Tsjekkia'],['DE','Tyskland'],['DK','Danmark'],['DO','Den dominikanske rep.'],['DZ','Algerie'],['EC','Ecuador'],['EE','Estland'],['EG','Egypt'],['ES','Spania'],['ET','Etiopia'],['FI','Finland'],['FJ','Fiji'],['FR','Frankrike'],['GB','Storbritannia'],['GE','Georgia'],['GH','Ghana'],['GR','Hellas'],['GT','Guatemala'],['HK','Hong Kong'],['HN','Honduras'],['HR','Kroatia'],['HT','Haiti'],['HU','Ungarn'],['ID','Indonesia'],['IE','Irland'],['IL','Israel'],['IN','India'],['IQ','Irak'],['IR','Iran'],['IS','Island'],['IT','Italia'],['JM','Jamaica'],['JO','Jordan'],['JP','Japan'],['KE','Kenya'],['KR','Sør-Korea'],['KW','Kuwait'],['KY','Caymanøyene'],['KZ','Kasakhstan'],['LB','Libanon'],['LI','Liechtenstein'],['LK','Sri Lanka'],['LT','Litauen'],['LU','Luxembourg'],['LV','Latvia'],['LY','Libya'],['MA','Marokko'],['MC','Monaco'],['MD','Moldova'],['ME','Montenegro'],['MK','Nord-Makedonia'],['MT','Malta'],['MU','Mauritius'],['MX','Mexico'],['MY','Malaysia'],['MZ','Mosambik'],['NA','Namibia'],['NG','Nigeria'],['NL','Nederland'],['NO','Norge'],['NP','Nepal'],['NZ','New Zealand'],['OM','Oman'],['PA','Panama'],['PE','Peru'],['PH','Filippinene'],['PK','Pakistan'],['PL','Polen'],['PT','Portugal'],['PY','Paraguay'],['QA','Qatar'],['RO','Romania'],['RS','Serbia'],['RU','Russland'],['SA','Saudi-Arabia'],['SC','Seychellene'],['SE','Sverige'],['SG','Singapore'],['SI','Slovenia'],['SK','Slovakia'],['SM','San Marino'],['SN','Senegal'],['SV','El Salvador'],['TH','Thailand'],['TN','Tunisia'],['TR','Tyrkia'],['TT','Trinidad og Tobago'],['TW','Taiwan'],['TZ','Tanzania'],['UA','Ukraina'],['UG','Uganda'],['US','USA'],['UY','Uruguay'],['UZ','Usbekistan'],['VE','Venezuela'],['VN','Vietnam'],['XK','Kosovo'],['ZA','Sør-Afrika'],['ZM','Zambia'],['ZW','Zimbabwe']];
+
+const CURRENCIES=[['AED','AED'],['AUD','AUD'],['BRL','BRL'],['CAD','CAD'],['CHF','CHF'],['CNY','CNY'],['CZK','CZK'],['DKK','DKK'],['EUR','EUR'],['GBP','GBP'],['HKD','HKD'],['HUF','HUF'],['IDR','IDR'],['ILS','ILS'],['INR','INR'],['JPY','JPY'],['KRW','KRW'],['MXN','MXN'],['MYR','MYR'],['NOK','NOK'],['NZD','NZD'],['PLN','PLN'],['RON','RON'],['RUB','RUB'],['SAR','SAR'],['SEK','SEK'],['SGD','SGD'],['THB','THB'],['TRY','TRY'],['USD','USD'],['ZAR','ZAR']];
+
+const PROP_TYPES=[['DPI901','Kontorlokale (Office)'],['DPI902','Hotellrom'],['DPI903','B&B-rom'],['DPI904','Hus/Enebolig'],['DPI905','Leilighet'],['DPI906','Bobil/mobilhjem'],['DPI907','Campingplass'],['DPI908','Båt'],['DPI909','Parkeringsplass'],['DPI910','Annet (Other)']];
+
+const ADDR_TYPES=[['OECD301','Bolig eller næring'],['OECD302','Bolig (residential)'],['OECD303','Næring (business)'],['OECD304','Registrert forretningsadresse (registeredOffice)'],['OECD305','Uspesifisert']];
+
+let sellerCount=0;
+let propCount=0;
+let lastXML='';
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const now=new Date();
+  document.getElementById('ms_ts').value=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  ['po_rcc','po_tin_by','po_addr_cc'].forEach(id=>popSel(id,'NO'));
+});
+
+function popSel(id,def='NO'){
+  const s=document.getElementById(id);if(!s)return;
+  s.innerHTML=COUNTRIES.map(([c,n])=>`<option value="${c}"${c===def?' selected':''}>${c} – ${n}</option>`).join('');
+}
+function currSel(id,def='NOK'){
+  return `<select id="${id}" style="padding:5px 6px;font-size:12px">${CURRENCIES.map(([c])=>`<option value="${c}"${c===def?' selected':''}>${c}</option>`).join('')}</select>`;
+}
+function countrySel(id,def='NO'){
+  return `<select id="${id}">${COUNTRIES.map(([c,n])=>`<option value="${c}"${c===def?' selected':''}>${c} – ${n}</option>`).join('')}</select>`;
+}
+
+function toggleCorrField(){
+  document.getElementById('corrFieldWrap').style.display=document.getElementById('ms_indic').value==='DPI402'?'block':'none';
+}
+
+// ── QUARTERLY GRID ──────────────────────────────────────
+function qGrid(sid,rows){
+  let h=`<div class="q-grid"><div class="q-lbl"></div><div class="q-hdr">Q1 (jan–mar)</div><div class="q-hdr">Q2 (apr–jun)</div><div class="q-hdr">Q3 (jul–sep)</div><div class="q-hdr">Q4 (okt–des)</div></div>`;
+  rows.forEach(([lbl,fld,isMoney])=>{
+    if(isMoney){
+      h+=`<div class="q-grid"><div class="q-lbl">${lbl}</div>`;
+      for(let q=1;q<=4;q++){
+        h+=`<div class="money-wrap"><input type="number" id="${sid}_${fld}_q${q}" placeholder="0">${currSel(`${sid}_${fld}_q${q}_c`)}</div>`;
+      }
+      h+=`</div>`;
+    } else {
+      h+=`<div class="q-grid"><div class="q-lbl">${lbl}</div>`;
+      for(let q=1;q<=4;q++)h+=`<input type="number" id="${sid}_${fld}_q${q}" placeholder="0" min="0">`;
+      h+=`</div>`;
+    }
+  });
+  return h;
+}
+
+// ── ACTIVITY BLOCKS ──────────────────────────────────────
+function buildImmovable(sid,pid){
+  return `<div class="activity-section" id="${sid}_prop_${pid}">
+  <div class="activity-title">🏠 Eiendom #${pid} <span class="tag" style="font-size:10px">PropertyListing</span>
+    <button class="btn btn-d" style="margin-left:auto" onclick="document.getElementById('${sid}_prop_${pid}').remove()">✕</button>
+  </div>
+  <div class="row r2">
+    <div><label class="lbl">Eiendomstype <span class="req">*</span> <span class="tag">PropertyType</span></label>
+      <select id="${sid}_p${pid}_type" onchange="toggleOtherProp('${sid}','${pid}')">
+        ${PROP_TYPES.map(([v,l])=>`<option value="${v}">${v} – ${l}</option>`).join('')}
+      </select>
+    </div>
+    <div id="${sid}_p${pid}_other_wrap" style="display:none">
+      <label class="lbl">Beskriv type <span class="tag">OtherPropertyType</span></label>
+      <input type="text" id="${sid}_p${pid}_other" placeholder="f.eks. Fritidsbolig">
+    </div>
+  </div>
+  <div class="row r2">
+    <div><label class="lbl">Matrikkel-/eiendomsnummer <span class="opt">(valgfri)</span> <span class="tag">LandRegistrationNumber</span></label>
+      <input type="text" id="${sid}_p${pid}_matr" placeholder="0301/200/1">
+      <div class="help">Norsk matrikkel- eller gårds-/bruksnummer.</div>
+    </div>
+    <div><label class="lbl">Antall utleiedager <span class="opt">(valgfri)</span> <span class="tag">RentedDays</span></label>
+      <input type="number" id="${sid}_p${pid}_days" placeholder="0" min="0">
+    </div>
+  </div>
+  <div class="sub" style="background:#fff">
+    <div class="sub-t">📍 Eiendomsadresse <span class="tag">Address legalAddressType="OECD302"</span></div>
+    <div class="row r4">
+      <div><label class="lbl">Land <span class="req">*</span></label>${countrySel(`${sid}_p${pid}_acc`)}</div>
+      <div><label class="lbl">Gate</label><input type="text" id="${sid}_p${pid}_street" placeholder="Dagsveien"></div>
+      <div><label class="lbl">Byggnr</label><input type="text" id="${sid}_p${pid}_bld" placeholder="23a"></div>
+      <div><label class="lbl">Postnr</label><input type="text" id="${sid}_p${pid}_post" placeholder="4800"></div>
+    </div>
+    <div class="row r2">
+      <div><label class="lbl">By <span class="req">*</span></label><input type="text" id="${sid}_p${pid}_city" placeholder="Arendal"></div>
+      <div><label class="lbl">Fritekst-adresse <span class="opt">(valgfri)</span></label><input type="text" id="${sid}_p${pid}_free" placeholder="Dagsveien 23a 4800 Arendal"></div>
+    </div>
+  </div>
+  <div class="sub" style="background:#fff">
+    <div class="sub-t">💰 Kvartalsvise beløp <span class="tag">Consideration / Fees / Taxes / NumberOfActivities</span></div>
+    <div class="info-box" style="margin-top:0">Vederlag = bruttobeløp utbetalt til selger. Gebyrer = plattformens provisjon/gebyr. Skatter/avgifter = tilbakeholdt skatt. Alle hele tall, ingen desimaler.</div>
+    ${qGrid(sid+'_p'+pid,'prop',[['Vederlag (Consideration) *','cons',true],['Antall utleietransaksjoner *','numb',false],['Gebyrer (Fees) *','fees',true],['Skatter/avgifter (Taxes) *','tax',true]])}
+  </div>
+</div>`;
+}
+
+function toggleOtherProp(sid,pid){
+  const v=document.getElementById(`${sid}_p${pid}_type`).value;
+  document.getElementById(`${sid}_p${pid}_other_wrap`).style.display=v==='DPI910'?'block':'none';
+}
+
+function buildPersonalSvcs(sid){
+  return `<div class="activity-section">
+  <div class="activity-title">🛠️ Personlige tjenester <span class="tag">PersonalServices</span></div>
+  <div class="info-box">Tjenester utført av selgeren personlig via plattformen (håndverk, transport, rengjøring, undervisning, osv.).</div>
+  ${qGrid(sid+'_ps','svc',[['Vederlag (Consideration) *','cons',true],['Antall oppdrag *','numb',false],['Gebyrer (Fees) *','fees',true],['Skatter/avgifter (Taxes) *','tax',true]])}
+</div>`;
+}
+
+function buildTransport(sid){
+  return `<div class="activity-section">
+  <div class="activity-title">🚗 Utleie av transportmidler <span class="tag">TransportationRental</span></div>
+  <div class="info-box">Utleie av kjøretøy, båt, sykkel, e-sparkesykkel o.l. via plattformen.</div>
+  ${qGrid(sid+'_tr','tr',[['Vederlag (Consideration) *','cons',true],['Antall utleier *','numb',false],['Gebyrer (Fees) *','fees',true],['Skatter/avgifter (Taxes) *','tax',true]])}
+</div>`;
+}
+
+function buildSaleOfGoods(sid){
+  return `<div class="activity-section">
+  <div class="activity-title">📦 Salg av varer <span class="tag">SaleOfGoods</span></div>
+  <div class="info-box">Salg av fysiske varer gjennom plattformen (utvidet omfang / DAC7).</div>
+  ${qGrid(sid+'_sg','sg',[['Vederlag (Consideration) *','cons',true],['Antall salg *','numb',false],['Gebyrer (Fees) *','fees',true],['Skatter/avgifter (Taxes) *','tax',true]])}
+</div>`;
+}
+
+// ── ADD SELLER ──────────────────────────────────────────
+function addSeller(){
+  sellerCount++;
+  const sid='s'+sellerCount;
+  const container=document.getElementById('sellersContainer');
+  const div=document.createElement('div');
+  div.className='dyn-wrap';div.id='seller_'+sid;
+  div.innerHTML=buildSellerHTML(sid);
+  container.appendChild(div);
+  // init country selects
+  [`${sid}_rcc`,`${sid}_tin_by`,`${sid}_addr_cc`,`${sid}_birth_cc`].forEach(id=>popSel2(id,'NO'));
+  // init activity section (none by default)
+  document.getElementById(`${sid}_act_body`).innerHTML='<div class="warn-box">Velg minst én aktivitetstype ovenfor.</div>';
+}
+
+function popSel2(id,def='NO'){
+  const s=document.getElementById(id);if(!s)return;
+  s.innerHTML=COUNTRIES.map(([c,n])=>`<option value="${c}"${c===def?' selected':''}>${c} – ${n}</option>`).join('');
+}
+
+function buildSellerHTML(sid){
+  return `
+  <div class="dyn-hdr" onclick="toggleCollapse('seller_${sid}')">
+    <div class="dyn-hdr-l"><span class="badge b-blue" id="${sid}_badge">Selger ${sellerCount}</span>
+      <span id="${sid}_nameDisplay" style="color:var(--muted);font-weight:400;font-size:12px">Ny selger</span>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-d" onclick="event.stopPropagation();document.getElementById('seller_${sid}').remove()">✕ Fjern</button>
+      <span class="caret">▼</span>
+    </div>
+  </div>
+  <div class="dyn-body">
+
+    <div class="toggle-wrap">
+      <button class="toggle-btn active" id="${sid}_btn_person" onclick="switchSellerType('${sid}','person')">👤 Privatperson (IndividualSeller)</button>
+      <button class="toggle-btn" id="${sid}_btn_entity" onclick="switchSellerType('${sid}','entity')">🏢 Foretak (EntitySeller)</button>
+    </div>
+
+    <!-- PERSON IDENTITY -->
+    <div id="${sid}_person_id">
+      <div class="sub"><div class="sub-t">👤 Personidentitet <span class="tag">IndSellerID</span></div>
+        <div class="row r3">
+          <div><label class="lbl">Hjemland <span class="req">*</span> <span class="tag">ResCountryCode</span></label><select id="${sid}_rcc"></select></div>
+          <div><label class="lbl">TIN/Fødselsnummer <span class="req">*</span></label>
+            <input type="text" id="${sid}_tin" placeholder="19116121789" oninput="updateSellerName('${sid}')">
+            <div class="help">Norsk fødselsnummer eller utenlandsk skattenummer. Bruk «NOTIN» hvis ukjent.</div>
+          </div>
+          <div><label class="lbl">TIN utstedt av</label><select id="${sid}_tin_by"></select></div>
+        </div>
+        <div class="row r3">
+          <div><label class="lbl">Fornavn <span class="req">*</span> <span class="tag">FirstName</span></label>
+            <input type="text" id="${sid}_fname" placeholder="Arnfrid" oninput="updateSellerName('${sid}')">
+          </div>
+          <div><label class="lbl">Mellomnavn <span class="opt">(valgfri)</span> <span class="tag">MiddleName</span></label>
+            <input type="text" id="${sid}_mname" placeholder="">
+          </div>
+          <div><label class="lbl">Etternavn <span class="req">*</span> <span class="tag">LastName</span></label>
+            <input type="text" id="${sid}_lname" placeholder="Davidsen" oninput="updateSellerName('${sid}')">
+          </div>
+        </div>
+        <div class="row r3">
+          <div><label class="lbl">Fødselsdato <span class="req">*</span> <span class="tag">BirthDate</span></label>
+            <input type="date" id="${sid}_bdate">
+          </div>
+          <div><label class="lbl">Fødested (by) <span class="opt">(valgfri)</span> <span class="tag">BirthPlace / City</span></label>
+            <input type="text" id="${sid}_bcity" placeholder="Oslo">
+          </div>
+          <div><label class="lbl">Fødeland <span class="tag">BirthPlace / CountryCode</span></label><select id="${sid}_birth_cc"></select></div>
+        </div>
+        <div class="row r3">
+          <div><label class="lbl">Nasjonalitet <span class="opt">(valgfri)</span> <span class="tag">Nationality</span></label>
+            <select id="${sid}_nat"><!-- JS --></select>
+          </div>
+          <div><label class="lbl">VAT-nummer <span class="opt">(valgfri)</span></label><input type="text" id="${sid}_vat" placeholder="MVA-nr"></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTITY IDENTITY -->
+    <div id="${sid}_entity_id" style="display:none">
+      <div class="sub"><div class="sub-t">🏢 Foretaksidentitet <span class="tag">EntSellerID</span></div>
+        <div class="row r3">
+          <div><label class="lbl">Hjemland <span class="req">*</span></label><select id="${sid}_e_rcc"><!-- JS --></select></div>
+          <div><label class="lbl">TIN/Org.nr <span class="req">*</span></label>
+            <input type="text" id="${sid}_e_tin" placeholder="8692763268" oninput="updateSellerName('${sid}')">
+          </div>
+          <div><label class="lbl">TIN utstedt av</label><select id="${sid}_e_tin_by"><!-- JS --></select></div>
+        </div>
+        <div class="row r3">
+          <div><label class="lbl">Foretaksnavn <span class="req">*</span></label>
+            <input type="text" id="${sid}_e_name" placeholder="NETTET AS" oninput="updateSellerName('${sid}')">
+          </div>
+          <div><label class="lbl">VAT-nummer <span class="opt">(valgfri)</span></label><input type="text" id="${sid}_e_vat" placeholder="MVA-nr"></div>
+          <div><label class="lbl">IN-type <span class="opt">(valgfri)</span> <span class="tag">IN / INType</span></label>
+            <select id="${sid}_e_intype">
+              <option value="">– Ingen –</option>
+              <option value="LEI">LEI – Legal Entity Identifier</option>
+              <option value="EIN">EIN – Entity Identification Number</option>
+              <option value="BRN">BRN – Business Registration Number</option>
+              <option value="IIN">IIN – Individual Identification Number</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHARED: ADDRESS + FINANCIAL ID -->
+    <div class="sub"><div class="sub-t">📍 Selgers adresse <span class="tag">Address</span></div>
+      <div class="row r4">
+        <div><label class="lbl">Adressetype <span class="tag">legalAddressType</span></label>
+          <select id="${sid}_addr_type">
+            ${ADDR_TYPES.map(([v,l])=>`<option value="${v}"${v==='OECD302'?' selected':''}>${v} – ${l}</option>`).join('')}
+          </select>
+        </div>
+        <div><label class="lbl">Land <span class="req">*</span></label><select id="${sid}_addr_cc"></select></div>
+        <div><label class="lbl">Gate</label><input type="text" id="${sid}_addr_street" placeholder="Madlaveien 21"></div>
+        <div><label class="lbl">Postnr</label><input type="text" id="${sid}_addr_post" placeholder="4084"></div>
+      </div>
+      <div class="row r2">
+        <div><label class="lbl">By <span class="req">*</span></label><input type="text" id="${sid}_addr_city" placeholder="Stavanger"></div>
+        <div><label class="lbl">Fritekst-adresse <span class="opt">(valgfri)</span></label><input type="text" id="${sid}_addr_free" placeholder="Madlaveien 21, 4084 Stavanger"></div>
+      </div>
+    </div>
+
+    <div class="sub"><div class="sub-t">🏦 Finansiell identifikator <span class="tag">FinancialIdentifier</span></div>
+      <div class="info-box" style="margin-top:0">Kontonummer som betalingen er utbetalt til. Brukes for å koble selger til finansiell konto.</div>
+      <div class="row r3">
+        <div><label class="lbl">Kontonummer/IBAN <span class="opt">(valgfri – Mandatory)</span> <span class="tag">Identifier</span></label>
+          <input type="text" id="${sid}_fin_id" placeholder="12345678911">
+        </div>
+        <div><label class="lbl">Kontotype <span class="tag">AccountNumberType</span></label>
+          <select id="${sid}_fin_type">
+            <option value="Bank">Bank</option>
+            <option value="IBAN">IBAN</option>
+            <option value="EWallet">E-wallet</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div><label class="lbl">Kontoholder <span class="opt">(valgfri)</span> <span class="tag">AccountHolderName</span></label>
+          <input type="text" id="${sid}_fin_name" placeholder="Fullt navn på kontoholder">
+        </div>
+      </div>
+    </div>
+
+    <!-- RELEVANT ACTIVITIES -->
+    <div class="sub"><div class="sub-t">📊 Relevante aktiviteter <span class="tag">RelevantActivities</span></div>
+      <div class="info-box" style="margin-top:0">Velg alle aktivitetstyper selgeren har utøvd via plattformen i rapporteringsperioden. Minst én type kreves.</div>
+      <div class="cb-grid">
+        <label class="cb-item" onclick="updateActivities('${sid}')">
+          <input type="checkbox" id="${sid}_act_prop"> <label>🏠 Utleie av fast eiendom <span class="cb-code">ImmovableProperty</span></label>
+        </label>
+        <label class="cb-item" onclick="updateActivities('${sid}')">
+          <input type="checkbox" id="${sid}_act_svc"> <label>🛠️ Personlige tjenester <span class="cb-code">PersonalServices</span></label>
+        </label>
+        <label class="cb-item" onclick="updateActivities('${sid}')">
+          <input type="checkbox" id="${sid}_act_tr"> <label>🚗 Utleie av transportmidler <span class="cb-code">TransportationRental</span></label>
+        </label>
+        <label class="cb-item" onclick="updateActivities('${sid}')">
+          <input type="checkbox" id="${sid}_act_sg"> <label>📦 Salg av varer <span class="cb-code">SaleOfGoods</span></label>
+        </label>
+      </div>
+      <div id="${sid}_act_body" style="margin-top:12px"></div>
+    </div>
+
+    <div class="sub"><div class="sub-t">🔖 DocSpec</div>
+      <div class="row r3">
+        <div><label class="lbl">DocTypeIndic <span class="req">*</span></label>
+          <select id="${sid}_doctype">
+            <option value="OECD1">OECD1 – Ny data (produksjon)</option>
+            <option value="OECD2">OECD2 – Korrigerte data</option>
+            <option value="OECD3">OECD3 – Sletting av data</option>
+            <option value="OECD11" selected>OECD11 – Ny testdata</option>
+            <option value="OECD12">OECD12 – Korrigerte testdata</option>
+            <option value="OECD13">OECD13 – Sletting av testdata</option>
+          </select>
+        </div>
+        <div><label class="lbl">DocRefId <span class="req">*</span></label>
+          <input type="text" id="${sid}_docref" placeholder="NO2026NO-123456789-SEL-${sellerCount}">
+        </div>
+        <div><label class="lbl">CorrDocRefId <span class="opt">(valgfri – ved korreksjon)</span></label>
+          <input type="text" id="${sid}_corrdocref" placeholder="Ref til tidligere doc">
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function switchSellerType(sid,type){
+  document.getElementById(`${sid}_person_id`).style.display=type==='person'?'block':'none';
+  document.getElementById(`${sid}_entity_id`).style.display=type==='entity'?'block':'none';
+  document.getElementById(`${sid}_btn_person`).className='toggle-btn'+(type==='person'?' active':'');
+  document.getElementById(`${sid}_btn_entity`).className='toggle-btn'+(type==='entity'?' active':'');
+  // init entity country selects on first switch
+  if(type==='entity'){
+    [`${sid}_e_rcc`,`${sid}_e_tin_by`].forEach(id=>{
+      const s=document.getElementById(id);if(s&&!s.children.length)popSel2(id,'NO');
+    });
+  }
+  // init nationality
+  if(type==='person'){
+    const natEl=document.getElementById(`${sid}_nat`);
+    if(natEl&&!natEl.children.length)popSel2(`${sid}_nat`,'NO');
+  }
+}
+
+function updateSellerName(sid){
+  const fname=document.getElementById(`${sid}_fname`)?.value||'';
+  const lname=document.getElementById(`${sid}_lname`)?.value||'';
+  const ename=document.getElementById(`${sid}_e_name`)?.value||'';
+  const isEntity=document.getElementById(`${sid}_entity_id`).style.display!=='none';
+  const name=isEntity?ename:(fname&&lname?`${fname} ${lname}`:fname||lname)||'Ny selger';
+  document.getElementById(`${sid}_nameDisplay`).textContent=name;
+}
+
+function updateActivities(sid){
+  const prop=document.getElementById(`${sid}_act_prop`).checked;
+  const svc=document.getElementById(`${sid}_act_svc`).checked;
+  const tr=document.getElementById(`${sid}_act_tr`).checked;
+  const sg=document.getElementById(`${sid}_act_sg`).checked;
+  const body=document.getElementById(`${sid}_act_body`);
+  if(!prop&&!svc&&!tr&&!sg){body.innerHTML='<div class="warn-box">Velg minst én aktivitetstype ovenfor.</div>';return;}
+  let html='';
+  if(prop){
+    propCount++;
+    html+=`<div id="${sid}_immov_wrap">${buildImmovable(sid,propCount)}<button class="btn btn-add" onclick="addPropListing('${sid}')">＋ Legg til eiendom til</button></div>`;
+  }
+  if(svc) html+=buildPersonalSvcs(sid);
+  if(tr)  html+=buildTransport(sid);
+  if(sg)  html+=buildSaleOfGoods(sid);
+  body.innerHTML=html;
+}
+
+function addPropListing(sid){
+  propCount++;
+  const pid=propCount;
+  const wrap=document.getElementById(`${sid}_immov_wrap`);
+  const addBtn=wrap.querySelector('.btn-add');
+  const div=document.createElement('div');
+  div.innerHTML=buildImmovable(sid,pid);
+  wrap.insertBefore(div.firstElementChild,addBtn);
+  // init country select in new listing
+  const csel=document.getElementById(`${sid}_p${pid}_acc`);
+  if(csel)csel.innerHTML=COUNTRIES.map(([c,n])=>`<option value="${c}"${c==='NO'?' selected':''}>${c} – ${n}</option>`).join('');
+}
+
+function toggleCollapse(id){document.getElementById(id).classList.toggle('collapsed')}
+
+// ═══════════════════════════════════
+// XML GENERATION
+// ═══════════════════════════════════
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function v(id){const e=document.getElementById(id);return e?e.value:'';}
+function qAmt(base,q){return v(`${base}_q${q}`)||'0';}
+function qCurr(base,q){return v(`${base}_q${q}_c`)||'NOK';}
+
+function qXML(base,tag,i2,i3,isMoney){
+  let s=`${i2}<dpi:${tag}>\n`;
+  for(let q=1;q<=4;q++){
+    if(isMoney) s+=`${i3}<dpi:${tag}Q${q} currCode="${qCurr(base,q)}">${qAmt(base,q)}</dpi:${tag}Q${q}>\n`;
+    else s+=`${i3}<dpi:Numb${tag}Q${q}>${qAmt(base,q)}</dpi:Numb${tag}Q${q}>\n`;
+  }
+  s+=`${i2}</dpi:${tag}>\n`;
+  return s;
+}
+
+function qBlockXML(base,i2,i3){
+  let s='';
+  // Consideration
+  s+=`${i2}<dpi:Consideration>\n`;
+  for(let q=1;q<=4;q++) s+=`${i3}<dpi:ConsQ${q} currCode="${qCurr(base+'cons',q)}">${qAmt(base+'cons',q)}</dpi:ConsQ${q}>\n`;
+  s+=`${i2}</dpi:Consideration>\n`;
+  // NumberOfActivities
+  s+=`${i2}<dpi:NumberOfActivities>\n`;
+  for(let q=1;q<=4;q++) s+=`${i3}<dpi:NumbQ${q}>${qAmt(base+'numb',q)}</dpi:NumbQ${q}>\n`;
+  s+=`${i2}</dpi:NumberOfActivities>\n`;
+  // Fees
+  s+=`${i2}<dpi:Fees>\n`;
+  for(let q=1;q<=4;q++) s+=`${i3}<dpi:FeesQ${q} currCode="${qCurr(base+'fees',q)}">${qAmt(base+'fees',q)}</dpi:FeesQ${q}>\n`;
+  s+=`${i2}</dpi:Fees>\n`;
+  // Taxes
+  s+=`${i2}<dpi:Taxes>\n`;
+  for(let q=1;q<=4;q++) s+=`${i3}<dpi:TaxQ${q} currCode="${qCurr(base+'tax',q)}">${qAmt(base+'tax',q)}</dpi:TaxQ${q}>\n`;
+  s+=`${i2}</dpi:Taxes>\n`;
+  return s;
+}
+
+function generateXML(){
+  const i1='  ',i2='    ',i3='      ',i4='        ',i5='          ',i6='            ';
+  const lines=[];
+  lines.push('<?xml version="1.0" encoding="UTF-8"?>');
+  lines.push(`<!-- Generert av DPI Testskjema – ${new Date().toLocaleString('no-NO')} -->`);
+  lines.push('<dpi:DPI_OECD version="1.0" xmlns:dpi="urn:oecd:ties:dpi:v1" xmlns:stf="urn:oecd:ties:dpistf:v1">');
+
+  // MessageSpec
+  lines.push(`${i1}<dpi:MessageSpec>`);
+  if(v('ms_seid')) lines.push(`${i2}<dpi:SendingEntityIN>${esc(v('ms_seid'))}</dpi:SendingEntityIN>`);
+  lines.push(`${i2}<dpi:TransmittingCountry>NO</dpi:TransmittingCountry>`);
+  lines.push(`${i2}<dpi:ReceivingCountry>NO</dpi:ReceivingCountry>`);
+  lines.push(`${i2}<dpi:MessageType>${v('ms_type')}</dpi:MessageType>`);
+  if(v('ms_warn')) lines.push(`${i2}<dpi:Warning>${esc(v('ms_warn'))}</dpi:Warning>`);
+  if(v('ms_contact')) lines.push(`${i2}<dpi:Contact>${esc(v('ms_contact'))}</dpi:Contact>`);
+  lines.push(`${i2}<dpi:MessageRefId>${esc(v('ms_refid'))}</dpi:MessageRefId>`);
+  lines.push(`${i2}<dpi:MessageTypeIndic>${v('ms_indic')}</dpi:MessageTypeIndic>`);
+  if(v('ms_indic')==='DPI402'&&v('ms_corrRef')) lines.push(`${i2}<dpi:CorrMessageRefId>${esc(v('ms_corrRef'))}</dpi:CorrMessageRefId>`);
+  lines.push(`${i2}<dpi:ReportingPeriod>${v('ms_period')}</dpi:ReportingPeriod>`);
+  lines.push(`${i2}<dpi:Timestamp>${v('ms_ts').replace('T','T')+':00'}</dpi:Timestamp>`);
+  lines.push(`${i1}</dpi:MessageSpec>`);
+
+  // DPIBody (skip if DPI403)
+  if(v('ms_indic')!=='DPI403'){
+    lines.push(`${i1}<dpi:DPIBody>`);
+
+    // PlatformOperator
+    lines.push(`${i2}<dpi:PlatformOperator>`);
+    if(v('po_rcc')) lines.push(`${i3}<dpi:ResCountryCode>${v('po_rcc')}</dpi:ResCountryCode>`);
+    lines.push(`${i3}<dpi:TIN issuedBy="${v('po_tin_by')}">${esc(v('po_tin'))}</dpi:TIN>`);
+    if(v('po_vat')) lines.push(`${i3}<dpi:VAT>${esc(v('po_vat'))}</dpi:VAT>`);
+    lines.push(`${i3}<dpi:Name>${esc(v('po_name'))}</dpi:Name>`);
+    if(v('po_bizname')) lines.push(`${i3}<dpi:PlatformBusinessName>${esc(v('po_bizname'))}</dpi:PlatformBusinessName>`);
+    lines.push(`${i3}<dpi:Address legalAddressType="OECD304">`);
+    lines.push(`${i4}<dpi:CountryCode>${v('po_addr_cc')}</dpi:CountryCode>`);
+    lines.push(`${i4}<dpi:AddressFix>`);
+    if(v('po_street')) lines.push(`${i5}<dpi:Street>${esc(v('po_street'))}</dpi:Street>`);
+    if(v('po_building')) lines.push(`${i5}<dpi:BuildingIdentifier>${esc(v('po_building'))}</dpi:BuildingIdentifier>`);
+    if(v('po_post')) lines.push(`${i5}<dpi:PostCode>${esc(v('po_post'))}</dpi:PostCode>`);
+    lines.push(`${i5}<dpi:City>${esc(v('po_city')||'Oslo')}</dpi:City>`);
+    lines.push(`${i4}</dpi:AddressFix>`);
+    lines.push(`${i3}</dpi:Address>`);
+    lines.push(`${i3}<dpi:AssumedReporting>${v('po_assumed')}</dpi:AssumedReporting>`);
+    lines.push(`${i3}<dpi:DocSpec>`);
+    lines.push(`${i4}<stf:DocTypeIndic>${v('po_doctype')}</stf:DocTypeIndic>`);
+    lines.push(`${i4}<stf:DocRefId>${esc(v('po_docref'))}</stf:DocRefId>`);
+    if(v('po_corrdocref')) lines.push(`${i4}<stf:CorrDocRefId>${esc(v('po_corrdocref'))}</stf:CorrDocRefId>`);
+    lines.push(`${i3}</dpi:DocSpec>`);
+    lines.push(`${i2}</dpi:PlatformOperator>`);
+
+    // ReportableSellers
+    document.querySelectorAll('[id^="seller_"]').forEach(wrap=>{
+      const sid=wrap.id.replace('seller_','');
+      const isEntity=document.getElementById(`${sid}_entity_id`).style.display!=='none';
+      lines.push(`${i2}<dpi:ReportableSeller>`);
+      lines.push(`${i3}<dpi:Identity>`);
+
+      if(!isEntity){
+        lines.push(`${i4}<dpi:IndividualSeller><dpi:Standard>`);
+        lines.push(`${i5}<dpi:IndSellerID>`);
+        lines.push(`${i6}<dpi:ResCountryCode>${v(sid+'_rcc')}</dpi:ResCountryCode>`);
+        lines.push(`${i6}<dpi:TIN issuedBy="${v(sid+'_tin_by')}">${esc(v(sid+'_tin'))}</dpi:TIN>`);
+        if(v(sid+'_vat')) lines.push(`${i6}<dpi:VAT>${esc(v(sid+'_vat'))}</dpi:VAT>`);
+        lines.push(`${i6}<dpi:Name>`);
+        if(v(sid+'_fname')) lines.push(`${i6}  <dpi:FirstName>${esc(v(sid+'_fname'))}</dpi:FirstName>`);
+        if(v(sid+'_mname')) lines.push(`${i6}  <dpi:MiddleName>${esc(v(sid+'_mname'))}</dpi:MiddleName>`);
+        lines.push(`${i6}  <dpi:LastName>${esc(v(sid+'_lname'))}</dpi:LastName>`);
+        lines.push(`${i6}</dpi:Name>`);
+        lines.push(`${i6}<dpi:Address legalAddressType="${v(sid+'_addr_type')}">`);
+        lines.push(`${i6}  <dpi:CountryCode>${v(sid+'_addr_cc')}</dpi:CountryCode>`);
+        lines.push(`${i6}  <dpi:AddressFix>`);
+        if(v(sid+'_addr_street')) lines.push(`${i6}    <dpi:Street>${esc(v(sid+'_addr_street'))}</dpi:Street>`);
+        if(v(sid+'_addr_post')) lines.push(`${i6}    <dpi:PostCode>${esc(v(sid+'_addr_post'))}</dpi:PostCode>`);
+        lines.push(`${i6}    <dpi:City>${esc(v(sid+'_addr_city')||'Oslo')}</dpi:City>`);
+        lines.push(`${i6}  </dpi:AddressFix>`);
+        if(v(sid+'_addr_free')) lines.push(`${i6}  <dpi:AddressFree>${esc(v(sid+'_addr_free'))}</dpi:AddressFree>`);
+        lines.push(`${i6}</dpi:Address>`);
+        if(v(sid+'_nat')) lines.push(`${i6}<dpi:Nationality>${v(sid+'_nat')}</dpi:Nationality>`);
+        lines.push(`${i6}<dpi:BirthInfo>`);
+        if(v(sid+'_bdate')) lines.push(`${i6}  <dpi:BirthDate>${v(sid+'_bdate')}</dpi:BirthDate>`);
+        if(v(sid+'_bcity')){
+          lines.push(`${i6}  <dpi:BirthPlace>`);
+          lines.push(`${i6}    <dpi:City>${esc(v(sid+'_bcity'))}</dpi:City>`);
+          lines.push(`${i6}    <dpi:CountryInfo><dpi:CountryCode>${v(sid+'_birth_cc')}</dpi:CountryCode></dpi:CountryInfo>`);
+          lines.push(`${i6}  </dpi:BirthPlace>`);
+        }
+        lines.push(`${i6}</dpi:BirthInfo>`);
+        lines.push(`${i5}</dpi:IndSellerID>`);
+        if(v(sid+'_fin_id')){
+          lines.push(`${i5}<dpi:FinancialIdentifier>`);
+          lines.push(`${i6}<dpi:Identifier AccountNumberType="${v(sid+'_fin_type')}">${esc(v(sid+'_fin_id'))}</dpi:Identifier>`);
+          if(v(sid+'_fin_name')) lines.push(`${i6}<dpi:AccountHolderName>${esc(v(sid+'_fin_name'))}</dpi:AccountHolderName>`);
+          lines.push(`${i5}</dpi:FinancialIdentifier>`);
+        }
+        lines.push(`${i4}</dpi:Standard></dpi:IndividualSeller>`);
+      } else {
+        lines.push(`${i4}<dpi:EntitySeller><dpi:Standard>`);
+        lines.push(`${i5}<dpi:EntSellerID>`);
+        if(v(sid+'_e_rcc')) lines.push(`${i6}<dpi:ResCountryCode>${v(sid+'_e_rcc')}</dpi:ResCountryCode>`);
+        lines.push(`${i6}<dpi:TIN issuedBy="${v(sid+'_e_tin_by')}">${esc(v(sid+'_e_tin'))}</dpi:TIN>`);
+        if(v(sid+'_e_vat')) lines.push(`${i6}<dpi:VAT>${esc(v(sid+'_e_vat'))}</dpi:VAT>`);
+        if(v(sid+'_e_intype')) lines.push(`${i6}<dpi:IN INType="${v(sid+'_e_intype')}" issuedBy="${v(sid+'_e_rcc')}">${esc(v(sid+'_e_tin'))}</dpi:IN>`);
+        lines.push(`${i6}<dpi:Name>${esc(v(sid+'_e_name'))}</dpi:Name>`);
+        lines.push(`${i6}<dpi:Address legalAddressType="${v(sid+'_addr_type')}">`);
+        lines.push(`${i6}  <dpi:CountryCode>${v(sid+'_addr_cc')}</dpi:CountryCode>`);
+        lines.push(`${i6}  <dpi:AddressFix>`);
+        if(v(sid+'_addr_street')) lines.push(`${i6}    <dpi:Street>${esc(v(sid+'_addr_street'))}</dpi:Street>`);
+        if(v(sid+'_addr_post')) lines.push(`${i6}    <dpi:PostCode>${esc(v(sid+'_addr_post'))}</dpi:PostCode>`);
+        lines.push(`${i6}    <dpi:City>${esc(v(sid+'_addr_city')||'Oslo')}</dpi:City>`);
+        lines.push(`${i6}  </dpi:AddressFix>`);
+        lines.push(`${i6}</dpi:Address>`);
+        lines.push(`${i5}</dpi:EntSellerID>`);
+        if(v(sid+'_fin_id')){
+          lines.push(`${i5}<dpi:FinancialIdentifier>`);
+          lines.push(`${i6}<dpi:Identifier AccountNumberType="${v(sid+'_fin_type')}">${esc(v(sid+'_fin_id'))}</dpi:Identifier>`);
+          if(v(sid+'_fin_name')) lines.push(`${i6}<dpi:AccountHolderName>${esc(v(sid+'_fin_name'))}</dpi:AccountHolderName>`);
+          lines.push(`${i5}</dpi:FinancialIdentifier>`);
+        }
+        lines.push(`${i4}</dpi:Standard></dpi:EntitySeller>`);
+      }
+      lines.push(`${i3}</dpi:Identity>`);
+
+      // RelevantActivities
+      const hasProp=document.getElementById(`${sid}_act_prop`)?.checked;
+      const hasSvc=document.getElementById(`${sid}_act_svc`)?.checked;
+      const hasTr=document.getElementById(`${sid}_act_tr`)?.checked;
+      const hasSg=document.getElementById(`${sid}_act_sg`)?.checked;
+      if(hasProp||hasSvc||hasTr||hasSg){
+        lines.push(`${i3}<dpi:RelevantActivities>`);
+
+        // ImmovableProperty
+        if(hasProp){
+          lines.push(`${i4}<dpi:ImmovableProperty>`);
+          wrap.querySelectorAll(`[id^="${sid}_prop_"]`).forEach(propEl=>{
+            const pid=propEl.id.replace(`${sid}_prop_`,'');
+            lines.push(`${i5}<dpi:PropertyListing>`);
+            // Address
+            const pcc=v(`${sid}_p${pid}_acc`);
+            lines.push(`${i6}<dpi:Address legalAddressType="OECD302">`);
+            lines.push(`${i6}  <dpi:CountryCode>${pcc}</dpi:CountryCode>`);
+            lines.push(`${i6}  <dpi:AddressFix>`);
+            if(v(`${sid}_p${pid}_street`)) lines.push(`${i6}    <dpi:Street>${esc(v(`${sid}_p${pid}_street`))}</dpi:Street>`);
+            if(v(`${sid}_p${pid}_bld`)) lines.push(`${i6}    <dpi:BuildingIdentifier>${esc(v(`${sid}_p${pid}_bld`))}</dpi:BuildingIdentifier>`);
+            if(v(`${sid}_p${pid}_post`)) lines.push(`${i6}    <dpi:PostCode>${esc(v(`${sid}_p${pid}_post`))}</dpi:PostCode>`);
+            lines.push(`${i6}    <dpi:City>${esc(v(`${sid}_p${pid}_city`)||'Oslo')}</dpi:City>`);
+            lines.push(`${i6}  </dpi:AddressFix>`);
+            if(v(`${sid}_p${pid}_free`)) lines.push(`${i6}  <dpi:AddressFree>${esc(v(`${sid}_p${pid}_free`))}</dpi:AddressFree>`);
+            lines.push(`${i6}</dpi:Address>`);
+            if(v(`${sid}_p${pid}_matr`)) lines.push(`${i6}<dpi:LandRegistrationNumber>${esc(v(`${sid}_p${pid}_matr`))}</dpi:LandRegistrationNumber>`);
+            // Quarterly
+            const pb=`${sid}_p${pid}_prop`;
+            lines.push(`${i6}<dpi:Consideration>`);
+            for(let q=1;q<=4;q++) lines.push(`${i6}  <dpi:ConsQ${q} currCode="${qCurr(pb+'cons',q)}">${qAmt(pb+'cons',q)}</dpi:ConsQ${q}>`);
+            lines.push(`${i6}</dpi:Consideration>`);
+            lines.push(`${i6}<dpi:NumberOfActivities>`);
+            for(let q=1;q<=4;q++) lines.push(`${i6}  <dpi:NumbQ${q}>${qAmt(pb+'numb',q)}</dpi:NumbQ${q}>`);
+            lines.push(`${i6}</dpi:NumberOfActivities>`);
+            lines.push(`${i6}<dpi:Fees>`);
+            for(let q=1;q<=4;q++) lines.push(`${i6}  <dpi:FeesQ${q} currCode="${qCurr(pb+'fees',q)}">${qAmt(pb+'fees',q)}</dpi:FeesQ${q}>`);
+            lines.push(`${i6}</dpi:Fees>`);
+            lines.push(`${i6}<dpi:Taxes>`);
+            for(let q=1;q<=4;q++) lines.push(`${i6}  <dpi:TaxQ${q} currCode="${qCurr(pb+'tax',q)}">${qAmt(pb+'tax',q)}</dpi:TaxQ${q}>`);
+            lines.push(`${i6}</dpi:Taxes>`);
+            lines.push(`${i6}<dpi:PropertyType>${v(`${sid}_p${pid}_type`)}</dpi:PropertyType>`);
+            if(v(`${sid}_p${pid}_type`)==='DPI910'&&v(`${sid}_p${pid}_other`)) lines.push(`${i6}<dpi:OtherPropertyType>${esc(v(`${sid}_p${pid}_other`))}</dpi:OtherPropertyType>`);
+            if(v(`${sid}_p${pid}_days`)) lines.push(`${i6}<dpi:RentedDays>${v(`${sid}_p${pid}_days`)}</dpi:RentedDays>`);
+            lines.push(`${i5}</dpi:PropertyListing>`);
+          });
+          lines.push(`${i4}</dpi:ImmovableProperty>`);
+        }
+
+        // PersonalServices
+        if(hasSvc){
+          lines.push(`${i4}<dpi:PersonalServices>`);
+          const pb=`${sid}_ps_svc`;
+          lines.push(`${i5}<dpi:Consideration>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:ConsQ${q} currCode="${qCurr(pb+'cons',q)}">${qAmt(pb+'cons',q)}</dpi:ConsQ${q}>`);
+          lines.push(`${i5}</dpi:Consideration>`);
+          lines.push(`${i5}<dpi:NumberOfActivities>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:NumbQ${q}>${qAmt(pb+'numb',q)}</dpi:NumbQ${q}>`);
+          lines.push(`${i5}</dpi:NumberOfActivities>`);
+          lines.push(`${i5}<dpi:Fees>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:FeesQ${q} currCode="${qCurr(pb+'fees',q)}">${qAmt(pb+'fees',q)}</dpi:FeesQ${q}>`);
+          lines.push(`${i5}</dpi:Fees>`);
+          lines.push(`${i5}<dpi:Taxes>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:TaxQ${q} currCode="${qCurr(pb+'tax',q)}">${qAmt(pb+'tax',q)}</dpi:TaxQ${q}>`);
+          lines.push(`${i5}</dpi:Taxes>`);
+          lines.push(`${i4}</dpi:PersonalServices>`);
+        }
+
+        // TransportationRental
+        if(hasTr){
+          lines.push(`${i4}<dpi:TransportationRental>`);
+          const pb=`${sid}_tr_tr`;
+          lines.push(`${i5}<dpi:Consideration>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:ConsQ${q} currCode="${qCurr(pb+'cons',q)}">${qAmt(pb+'cons',q)}</dpi:ConsQ${q}>`);
+          lines.push(`${i5}</dpi:Consideration>`);
+          lines.push(`${i5}<dpi:NumberOfActivities>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:NumbQ${q}>${qAmt(pb+'numb',q)}</dpi:NumbQ${q}>`);
+          lines.push(`${i5}</dpi:NumberOfActivities>`);
+          lines.push(`${i5}<dpi:Fees>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:FeesQ${q} currCode="${qCurr(pb+'fees',q)}">${qAmt(pb+'fees',q)}</dpi:FeesQ${q}>`);
+          lines.push(`${i5}</dpi:Fees>`);
+          lines.push(`${i5}<dpi:Taxes>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:TaxQ${q} currCode="${qCurr(pb+'tax',q)}">${qAmt(pb+'tax',q)}</dpi:TaxQ${q}>`);
+          lines.push(`${i5}</dpi:Taxes>`);
+          lines.push(`${i4}</dpi:TransportationRental>`);
+        }
+
+        // SaleOfGoods
+        if(hasSg){
+          lines.push(`${i4}<dpi:SaleOfGoods>`);
+          const pb=`${sid}_sg_sg`;
+          lines.push(`${i5}<dpi:Consideration>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:ConsQ${q} currCode="${qCurr(pb+'cons',q)}">${qAmt(pb+'cons',q)}</dpi:ConsQ${q}>`);
+          lines.push(`${i5}</dpi:Consideration>`);
+          lines.push(`${i5}<dpi:NumberOfActivities>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:NumbQ${q}>${qAmt(pb+'numb',q)}</dpi:NumbQ${q}>`);
+          lines.push(`${i5}</dpi:NumberOfActivities>`);
+          lines.push(`${i5}<dpi:Fees>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:FeesQ${q} currCode="${qCurr(pb+'fees',q)}">${qAmt(pb+'fees',q)}</dpi:FeesQ${q}>`);
+          lines.push(`${i5}</dpi:Fees>`);
+          lines.push(`${i5}<dpi:Taxes>`);
+          for(let q=1;q<=4;q++) lines.push(`${i5}  <dpi:TaxQ${q} currCode="${qCurr(pb+'tax',q)}">${qAmt(pb+'tax',q)}</dpi:TaxQ${q}>`);
+          lines.push(`${i5}</dpi:Taxes>`);
+          lines.push(`${i4}</dpi:SaleOfGoods>`);
+        }
+
+        lines.push(`${i3}</dpi:RelevantActivities>`);
+      }
+
+      // DocSpec
+      lines.push(`${i3}<dpi:DocSpec>`);
+      lines.push(`${i4}<stf:DocTypeIndic>${v(sid+'_doctype')}</stf:DocTypeIndic>`);
+      lines.push(`${i4}<stf:DocRefId>${esc(v(sid+'_docref'))}</stf:DocRefId>`);
+      if(v(sid+'_corrdocref')) lines.push(`${i4}<stf:CorrDocRefId>${esc(v(sid+'_corrdocref'))}</stf:CorrDocRefId>`);
+      lines.push(`${i3}</dpi:DocSpec>`);
+      lines.push(`${i2}</dpi:ReportableSeller>`);
+    });
+
+    lines.push(`${i1}</dpi:DPIBody>`);
+  }
+  lines.push('</dpi:DPI_OECD>');
+  lastXML=lines.join('\n');
+  document.getElementById('xmlOut').textContent=lastXML;
+  document.getElementById('btn-dl').disabled=false;
+  document.getElementById('btn-cp').disabled=false;
+  document.getElementById('s4').scrollIntoView({behavior:'smooth'});
+}
+
+function downloadXML(){
+  if(!lastXML)return;
+  const b=new Blob([lastXML],{type:'application/xml'});
+  const u=URL.createObjectURL(b);
+  const a=document.createElement('a');a.href=u;
+  const yr=v('ms_period').substring(0,4)||'xxxx';
+  const org=v('ms_seid')||v('po_tin')||'org';
+  a.download=`DPI_${org}_${yr}.xml`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);
+}
+function copyXML(){if(!lastXML)return;navigator.clipboard.writeText(lastXML).then(()=>alert('Kopiert ✓'));}
+</script>
+</body>
+</html>
